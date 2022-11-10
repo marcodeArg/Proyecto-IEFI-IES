@@ -11,6 +11,12 @@ namespace pryMoralesIEFI
 {
     internal class clsNeighbour : clsDataBase
     {
+
+        public clsNeighbour(string tn)
+        {
+            TableName = tn;
+        }
+
         private int cod_neighbour;
         private string description;
 

@@ -11,6 +11,11 @@ namespace pryMoralesIEFI
 {
     internal class clsActivity : clsDataBase
     {
+        public clsActivity(string tn)
+        {
+            TableName = tn;
+        }
+
         private int cod_activity;
         private string description;
 
