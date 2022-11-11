@@ -35,10 +35,10 @@ namespace pryMoralesIEFI
         public string Sql { get { return sql; } set { sql = value; } }
 
         //METODOS
-        public void ShowInGrid(DataGridView grid, string tn)
+        public void ShowInGrid(DataGridView grid)
         {
             dbConnection = new OleDbConnection(stringConnection);
-            sql = "SELECT * FROM "+ tn;
+            sql = "SELECT * FROM "+ tableName;
 
             try
             {
@@ -60,61 +60,9 @@ namespace pryMoralesIEFI
             }
         }
 
-        public void ShowClientFullInGrid(DataGridView grid)
-        {
-            dbConnection = new OleDbConnection(stringConnection);
-            sql = "SELECT Dni_Socio AS DNI,Nombre_Apellido AS Nombre,Direccion,Barrio.Detalle_Barrio AS Barrio,Actividad.Detalle_Actividad AS Actividad,Saldo " +
-                "FROM ((Socio " +
-                "INNER JOIN Barrio ON Socio.Codigo_Barrio = Barrio.Codigo_Barrio) " +
-                "INNER JOIN Actividad ON Socio.Codigo_Actividad = Actividad.Codigo_Actividad)";
 
-            try
-            {
-                dbConnection.Open();
-
-                dbCommand = new OleDbCommand(sql, dbConnection);
-
-                DataTable dt = new DataTable();
-
-                dbAdapter = new OleDbDataAdapter();
-                dbAdapter.SelectCommand = dbCommand;
-                dataBase = new DataSet();
-
-                dbAdapter.Fill(dt);
-                grid.DataSource =dt;
-
-                dbConnection.Close();
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Erro:" + err.Message);
-            }
-        }
-
-
-        //public DataTable ListarProductos()
-        //{
-        //    dbConnection = new OleDbConnection(stringConnection);
-        //    dbCommand = new OleDbCommand();
-            
-        //    //AHORA ESTA ANDANDO PERO SOLO CUANDO USO UN SOLO INNER JOIN
-
-        //    dbConnection.Open();
-        //    DataTable Tabla = new DataTable();
-        //    dbCommand.Connection = dbConnection;
-
-        //    dbCommand.CommandText = "SELECT Dni_Socio,Nombre_Apellido,Direccion,Barrio.Detalle_Barrio,Actividad.Detalle_Actividad,Saldo " +
-        //        "FROM ((Socio " + 
-        //        "INNER JOIN Barrio ON Socio.Codigo_Barrio = Barrio.Codigo_Barrio) " +
-        //        "INNER JOIN Actividad ON Socio.Codigo_Actividad = Actividad.Codigo_Actividad)";
-        //    dbCommand.CommandType = CommandType.Text;
-
-        //    dbReader = dbCommand.ExecuteReader();
-        //    Tabla.Load(dbReader);
-        //    dbReader.Close();
-        //    dbConnection.Close();
-        //    return Tabla;
-        //}
+        //PASARLO A LA CLASE CLIENTE
+        
 
         //Se puede hacer que lea la tabla de socios y despues mientras que no sea fin de archivo, dentro del while, lea la tabla de actividad y compare 
         //con el id que esta en la tabla de socios con el de actividad y lo remplce. Despues con el baarrio hacer exactamente lo mismo
@@ -147,6 +95,49 @@ namespace pryMoralesIEFI
             {
                 MessageBox.Show("Error", err.Message);
             }
+        }
+
+
+        public bool Exist(int cod)
+        {
+            dbConnection = new OleDbConnection(stringConnection);
+
+            try
+            {
+                dbConnection.Open();
+
+                dbCommand = new OleDbCommand(tableName, dbConnection);
+                dbCommand.CommandType = CommandType.TableDirect;
+
+                dbReader = dbCommand.ExecuteReader();
+
+                if (dbReader.HasRows)
+                {
+                    while (dbReader.Read())
+                    {
+                        if (Convert.ToInt32(dbReader.GetValue(0)) == cod)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+                dbReader.Close();
+                DbConnection.Close();
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error:" + err.Message);
+            }
+
+            //Suponiendo que no tiene filas
+            return false;
+
         }
 
 

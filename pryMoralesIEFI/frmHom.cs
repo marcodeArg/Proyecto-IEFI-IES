@@ -26,7 +26,8 @@ namespace pryMoralesIEFI
 
         private void actividadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmActivity actividades = new frmActivity();
+            actividades.ShowDialog();
         }
 
         private void barrioToolStripMenuItem_Click(object sender, EventArgs e)

@@ -40,8 +40,7 @@ namespace pryMoralesIEFI
         private void btnInsert_Click(object sender, EventArgs e)
         {
 
-            //HAY QUE VALIDAR SI EL ID NO EXISTE PARA PODER CARGARLO, PORQUE SINO TENDRIA QUE DAR ERROR
-            try
+            if (!client.Exist(Int32.Parse(txtDNI.Text)))
             {
                 client.Dni = Int32.Parse(txtDNI.Text);
                 client.Name = txtName.Text;
@@ -57,24 +56,67 @@ namespace pryMoralesIEFI
                 //Para que la grilla se actualice con el nuevo registro
                 client.ShowClientFullInGrid(dgvClient);
             }
-            catch (Exception err)
+            else
             {
+                MessageBox.Show("Ya existe un socio con el mismo DNI");
+                txtDNI.Focus();
 
-                MessageBox.Show("Error" + err.Message);
             }
-            
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (client.Exist(Int32.Parse(txtDNI.Text)))
+            {
+                client.Dni = Int32.Parse(txtDNI.Text);
+                client.Name = txtName.Text;
+                client.Address = txtAddress.Text;
+                client.Cod_neighbour = Int32.Parse(lstNeighbour.SelectedValue.ToString());
+                client.Cod_activity = Int32.Parse(lstActivity.SelectedValue.ToString());
+                client.Balance = Convert.ToInt32(txtBalance.Text);
 
+                client.UpdateClient();
+
+                MessageBox.Show("Modificado correctamente");
+
+                //Para que la grilla se actualice con el nuevo registro
+                client.ShowClientFullInGrid(dgvClient);
+            }
+            else
+            {
+                MessageBox.Show("No se encontro el socio con el DNI ingresado");
+                txtDNI.Focus();
+
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (client.Exist(Int32.Parse(txtDNI.Text)))
+            {
+                client.Dni = Int32.Parse(txtDNI.Text);
+                client.Name = txtName.Text;
+                client.Address = txtAddress.Text;
+                client.Cod_neighbour = Int32.Parse(lstNeighbour.SelectedValue.ToString());
+                client.Cod_activity = Int32.Parse(lstActivity.SelectedValue.ToString());
+                client.Balance = Convert.ToInt32(txtBalance.Text);
 
+                client.DeleteClient();
+
+                MessageBox.Show("Eliminado correctamente");
+
+                //Para que la grilla se actualice con el nuevo registro
+                client.ShowClientFullInGrid(dgvClient);
+            }
+            else
+            {
+                MessageBox.Show("No se encontro el socio con el DNI ingresado");
+                txtDNI.Focus();
+
+            }
         }
 
+        //El evento CellEnter ocurre cuando la celda seleccionada se modifica o cuando se selecciona alguna celda
         private void dgvClient_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             txtDNI.Text = dgvClient.CurrentRow.Cells[0].Value.ToString();
@@ -83,6 +125,14 @@ namespace pryMoralesIEFI
             lstNeighbour.Text = dgvClient.CurrentRow.Cells[3].Value.ToString();
             lstActivity.Text = dgvClient.CurrentRow.Cells[4].Value.ToString();
             txtBalance.Text = dgvClient.CurrentRow.Cells[5].Value.ToString();
+        }
+
+        private void txtDNISearch_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = client.DataBase.Tables["Socio"].DefaultView;
+            dv.RowFilter = String.Format("convert(DNI, 'System.String') LIKE '*{0}*'", txtDNISearch.Text);
+            dgvClient.DataSource = dv;
+
         }
     }
 }

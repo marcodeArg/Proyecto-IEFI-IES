@@ -50,6 +50,12 @@
     <Compile Include="clsClient.cs" />
     <Compile Include="clsDataBase.cs" />
     <Compile Include="clsNeighbour.cs" />
+    <Compile Include="frmActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmActivity.Designer.cs">
+      <DependentUpon>frmActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmActivity.resx">
+      <DependentUpon>frmActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmClient.resx">
       <DependentUpon>frmClient.cs</DependentUpon>
     </EmbeddedResource>
