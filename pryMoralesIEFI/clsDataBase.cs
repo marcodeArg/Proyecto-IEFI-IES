@@ -35,10 +35,9 @@ namespace pryMoralesIEFI
         public string Sql { get { return sql; } set { sql = value; } }
 
         //METODOS
-        public void ShowInGrid(DataGridView grid)
+        public void ShowInGrid(DataGridView grid, string sql)
         {
             dbConnection = new OleDbConnection(stringConnection);
-            sql = "SELECT * FROM "+ tableName;
 
             try
             {

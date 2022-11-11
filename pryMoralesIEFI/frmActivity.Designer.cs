@@ -39,11 +39,11 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.pbInfo = new System.Windows.Forms.PictureBox();
+            this.lblInfoContainer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActivities)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvActivities
@@ -52,7 +52,7 @@
             this.dgvActivities.AllowUserToDeleteRows = false;
             this.dgvActivities.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvActivities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvActivities.Location = new System.Drawing.Point(22, 73);
+            this.dgvActivities.Location = new System.Drawing.Point(22, 67);
             this.dgvActivities.Name = "dgvActivities";
             this.dgvActivities.ReadOnly = true;
             this.dgvActivities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -62,7 +62,7 @@
             // 
             // txtCodeSearch
             // 
-            this.txtCodeSearch.Location = new System.Drawing.Point(187, 30);
+            this.txtCodeSearch.Location = new System.Drawing.Point(187, 24);
             this.txtCodeSearch.Name = "txtCodeSearch";
             this.txtCodeSearch.Size = new System.Drawing.Size(266, 26);
             this.txtCodeSearch.TabIndex = 3;
@@ -71,7 +71,7 @@
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(23, 33);
+            this.lblSearch.Location = new System.Drawing.Point(23, 27);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(140, 20);
             this.lblSearch.TabIndex = 2;
@@ -79,14 +79,14 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(577, 124);
+            this.txtName.Location = new System.Drawing.Point(577, 118);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(206, 26);
             this.txtName.TabIndex = 14;
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(577, 73);
+            this.txtCode.Location = new System.Drawing.Point(577, 67);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(100, 26);
@@ -95,7 +95,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(485, 127);
+            this.lblName.Location = new System.Drawing.Point(485, 121);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(65, 20);
             this.lblName.TabIndex = 12;
@@ -104,7 +104,7 @@
             // lblDNI
             // 
             this.lblDNI.AutoSize = true;
-            this.lblDNI.Location = new System.Drawing.Point(485, 76);
+            this.lblDNI.Location = new System.Drawing.Point(485, 70);
             this.lblDNI.Name = "lblDNI";
             this.lblDNI.Size = new System.Drawing.Size(59, 20);
             this.lblDNI.TabIndex = 11;
@@ -112,7 +112,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(690, 210);
+            this.btnDelete.Location = new System.Drawing.Point(690, 204);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(91, 31);
             this.btnDelete.TabIndex = 20;
@@ -122,7 +122,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(586, 210);
+            this.btnUpdate.Location = new System.Drawing.Point(586, 204);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(91, 31);
             this.btnUpdate.TabIndex = 19;
@@ -132,7 +132,7 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(480, 210);
+            this.btnInsert.Location = new System.Drawing.Point(480, 204);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(91, 31);
             this.btnInsert.TabIndex = 18;
@@ -140,44 +140,44 @@
             this.btnInsert.UseVisualStyleBackColor = true;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
-            // label2
+            // lblInfo
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(158, 301);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(593, 20);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "• Recuerde seleccionar correctamente la actividad antes de eliminarla o modificar" +
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.lblInfo.Location = new System.Drawing.Point(158, 295);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(593, 20);
+            this.lblInfo.TabIndex = 22;
+            this.lblInfo.Text = "• Recuerde seleccionar correctamente la actividad antes de eliminarla o modificar" +
     "la";
             // 
-            // pictureBox1
+            // pbInfo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(37, 280);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(132, 63);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 24;
-            this.pictureBox1.TabStop = false;
+            this.pbInfo.Image = ((System.Drawing.Image)(resources.GetObject("pbInfo.Image")));
+            this.pbInfo.Location = new System.Drawing.Point(37, 274);
+            this.pbInfo.Name = "pbInfo";
+            this.pbInfo.Size = new System.Drawing.Size(132, 63);
+            this.pbInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbInfo.TabIndex = 24;
+            this.pbInfo.TabStop = false;
             // 
-            // label4
+            // lblInfoContainer
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(22, 261);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(761, 104);
-            this.label4.TabIndex = 25;
+            this.lblInfoContainer.BackColor = System.Drawing.SystemColors.Control;
+            this.lblInfoContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblInfoContainer.Location = new System.Drawing.Point(22, 255);
+            this.lblInfoContainer.Name = "lblInfoContainer";
+            this.lblInfoContainer.Size = new System.Drawing.Size(761, 104);
+            this.lblInfoContainer.TabIndex = 25;
             // 
             // frmActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 384);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label4);
+            this.ClientSize = new System.Drawing.Size(807, 381);
+            this.Controls.Add(this.lblInfo);
+            this.Controls.Add(this.pbInfo);
+            this.Controls.Add(this.lblInfoContainer);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnInsert);
@@ -195,7 +195,7 @@
             this.Text = "Actividades";
             this.Load += new System.EventHandler(this.frmActivity_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvActivities)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,8 +213,8 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnInsert;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.PictureBox pbInfo;
+        private System.Windows.Forms.Label lblInfoContainer;
     }
 }

@@ -32,7 +32,8 @@ namespace pryMoralesIEFI
 
         private void barrioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmNeighbour neighbour = new frmNeighbour();
+            neighbour.ShowDialog();
         }
 
         //CONSULTAS

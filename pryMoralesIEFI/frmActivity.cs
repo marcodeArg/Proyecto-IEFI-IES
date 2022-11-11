@@ -18,39 +18,59 @@ namespace pryMoralesIEFI
         }
 
         clsActivity activity = new clsActivity("Actividad");
-
+        private string sql = "SELECT Codigo_Actividad AS Codigo, Detalle_Actividad AS Nombre FROM Actividad";
 
 
         private void frmActivity_Load(object sender, EventArgs e)
         {
-            activity.ShowInGrid(dgvActivities);
+            //activity.Sql = "SELECT Codigo_Actividad AS Codigo, Detalle_Actividad AS Nombre FROM " + activity.TableName;
+            activity.ShowInGrid(dgvActivities, sql);
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
 
-            //activity.Cod_activity = Int32.Parse(txtCode.Text);
             activity.Description = txtName.Text;
             activity.InsertActivity();
 
-            activity.ShowInGrid(dgvActivities);
+            activity.ShowInGrid(dgvActivities, sql);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            activity.Cod_activity = Int32.Parse(txtCode.Text);
-            activity.Description = txtName.Text;
-            activity.UpdateActivity();
+            var eleccion = MessageBox.Show("¿Seguro desea actualizar esta actividad? Se actualizarán todos los registros que contengan dicha actividad", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            activity.ShowInGrid(dgvActivities);
+            if (eleccion == DialogResult.Yes)
+            {
+
+                activity.Cod_activity = Int32.Parse(txtCode.Text);
+                activity.Description = txtName.Text;
+                activity.UpdateActivity();
+
+                activity.ShowInGrid(dgvActivities,sql);
+            }
+            else
+            {
+                MessageBox.Show("Operación cancelada");
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            activity.Cod_activity = Int32.Parse(txtCode.Text);
-            activity.DeleteActivity();
+            var eleccion = MessageBox.Show("¿Seguro desea eliminar esta actividad? Se eliminarán todos los registros que contengan dicha actividad", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            activity.ShowInGrid(dgvActivities);
+            if (eleccion == DialogResult.Yes)
+            {
+
+                activity.Cod_activity = Int32.Parse(txtCode.Text);
+                activity.DeleteActivity();
+
+                activity.ShowInGrid(dgvActivities,sql);
+            }
+            else
+            {
+                MessageBox.Show("Operación cancelada");
+            }
         }
 
         private void dgvActivities_CellEnter(object sender, DataGridViewCellEventArgs e)

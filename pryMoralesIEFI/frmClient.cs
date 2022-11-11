@@ -58,7 +58,7 @@ namespace pryMoralesIEFI
             }
             else
             {
-                MessageBox.Show("Ya existe un socio con el mismo DNI");
+                MessageBox.Show("Ya existe un cliente con el mismo DNI");
                 txtDNI.Focus();
 
             }
@@ -68,6 +68,7 @@ namespace pryMoralesIEFI
         {
             if (client.Exist(Int32.Parse(txtDNI.Text)))
             {
+
                 client.Dni = Int32.Parse(txtDNI.Text);
                 client.Name = txtName.Text;
                 client.Address = txtAddress.Text;
@@ -84,7 +85,7 @@ namespace pryMoralesIEFI
             }
             else
             {
-                MessageBox.Show("No se encontro el socio con el DNI ingresado");
+                MessageBox.Show("No se encontro un cliente con el DNI ingresado");
                 txtDNI.Focus();
 
             }
@@ -94,23 +95,33 @@ namespace pryMoralesIEFI
         {
             if (client.Exist(Int32.Parse(txtDNI.Text)))
             {
-                client.Dni = Int32.Parse(txtDNI.Text);
-                client.Name = txtName.Text;
-                client.Address = txtAddress.Text;
-                client.Cod_neighbour = Int32.Parse(lstNeighbour.SelectedValue.ToString());
-                client.Cod_activity = Int32.Parse(lstActivity.SelectedValue.ToString());
-                client.Balance = Convert.ToInt32(txtBalance.Text);
+                var eleccion = MessageBox.Show("¿Seguro desea eliminar este cliente?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                client.DeleteClient();
+                if (eleccion == DialogResult.Yes)
+                {
 
-                MessageBox.Show("Eliminado correctamente");
+                    client.Dni = Int32.Parse(txtDNI.Text);
+                    client.Name = txtName.Text;
+                    client.Address = txtAddress.Text;
+                    client.Cod_neighbour = Int32.Parse(lstNeighbour.SelectedValue.ToString());
+                    client.Cod_activity = Int32.Parse(lstActivity.SelectedValue.ToString());
+                    client.Balance = Convert.ToInt32(txtBalance.Text);
 
-                //Para que la grilla se actualice con el nuevo registro
-                client.ShowClientFullInGrid(dgvClient);
+                    client.DeleteClient();
+
+                    MessageBox.Show("Eliminado correctamente");
+
+                    //Para que la grilla se actualice con el nuevo registro
+                    client.ShowClientFullInGrid(dgvClient);
+                }
+                else
+                {
+                    MessageBox.Show("Operación cancelada");
+                }
             }
             else
             {
-                MessageBox.Show("No se encontro el socio con el DNI ingresado");
+                MessageBox.Show("No se encontro un cliente con el DNI ingresado");
                 txtDNI.Focus();
 
             }
