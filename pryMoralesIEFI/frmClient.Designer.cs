@@ -71,6 +71,7 @@
             this.txtDNISearch.Size = new System.Drawing.Size(708, 26);
             this.txtDNISearch.TabIndex = 1;
             this.txtDNISearch.TextChanged += new System.EventHandler(this.txtDNISearch_TextChanged);
+            this.txtDNISearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNISearch_KeyPress);
             // 
             // dgvClient
             // 
@@ -153,6 +154,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(206, 26);
             this.txtName.TabIndex = 10;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
             // txtAddress
             // 
@@ -183,6 +185,7 @@
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.Size = new System.Drawing.Size(100, 26);
             this.txtBalance.TabIndex = 14;
+            this.txtBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBalance_KeyPress);
             // 
             // btnInsert
             // 

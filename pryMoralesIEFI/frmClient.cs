@@ -145,5 +145,20 @@ namespace pryMoralesIEFI
             dgvClient.DataSource = dv;
 
         }
+
+        private void txtDNISearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            client.IsNumber(e);
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            client.IsText(e);
+        }
+
+        private void txtBalance_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            client.IsNumber(e);
+        }
     }
 }

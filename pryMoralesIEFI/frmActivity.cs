@@ -23,7 +23,6 @@ namespace pryMoralesIEFI
 
         private void frmActivity_Load(object sender, EventArgs e)
         {
-            //activity.Sql = "SELECT Codigo_Actividad AS Codigo, Detalle_Actividad AS Nombre FROM " + activity.TableName;
             activity.ShowInGrid(dgvActivities, sql);
         }
 
@@ -81,6 +80,7 @@ namespace pryMoralesIEFI
 
         private void txtCodeSearch_TextChanged(object sender, EventArgs e)
         {
+
             DataView dv = activity.DataBase.Tables["Actividad"].DefaultView;
             dv.RowFilter = String.Format("convert(Codigo_Actividad, 'System.String') LIKE '*{0}*'", txtCodeSearch.Text);
             dgvActivities.DataSource = dv;

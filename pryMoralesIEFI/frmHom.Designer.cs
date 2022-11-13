@@ -34,6 +34,11 @@
             this.actividadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaPorActividadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaPorBarrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaPorSaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,9 +87,45 @@
             // 
             // consultasToolStripMenuItem
             // 
+            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consultaPorActividadToolStripMenuItem,
+            this.consultaPorBarrioToolStripMenuItem,
+            this.consultaPorSaldoToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.consultaTotalToolStripMenuItem});
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
             this.consultasToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
             this.consultasToolStripMenuItem.Text = "Consultas";
+            // 
+            // consultaTotalToolStripMenuItem
+            // 
+            this.consultaTotalToolStripMenuItem.Name = "consultaTotalToolStripMenuItem";
+            this.consultaTotalToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultaTotalToolStripMenuItem.Text = "Consulta total";
+            // 
+            // consultaPorActividadToolStripMenuItem
+            // 
+            this.consultaPorActividadToolStripMenuItem.Name = "consultaPorActividadToolStripMenuItem";
+            this.consultaPorActividadToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultaPorActividadToolStripMenuItem.Text = "Consulta por actividad";
+            this.consultaPorActividadToolStripMenuItem.Click += new System.EventHandler(this.consultaPorActividadToolStripMenuItem_Click);
+            // 
+            // consultaPorBarrioToolStripMenuItem
+            // 
+            this.consultaPorBarrioToolStripMenuItem.Name = "consultaPorBarrioToolStripMenuItem";
+            this.consultaPorBarrioToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultaPorBarrioToolStripMenuItem.Text = "Consulta por barrio";
+            // 
+            // consultaPorSaldoToolStripMenuItem
+            // 
+            this.consultaPorSaldoToolStripMenuItem.Name = "consultaPorSaldoToolStripMenuItem";
+            this.consultaPorSaldoToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultaPorSaldoToolStripMenuItem.Text = "Consulta por saldo";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
             // 
             // frmHom
             // 
@@ -112,6 +153,11 @@
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actividadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barrioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaPorActividadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaPorBarrioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaPorSaldoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem consultaTotalToolStripMenuItem;
     }
 }
 

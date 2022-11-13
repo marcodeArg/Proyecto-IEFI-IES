@@ -36,6 +36,13 @@ namespace pryMoralesIEFI
             neighbour.ShowDialog();
         }
 
+
+
         //CONSULTAS
+        private void consultaPorActividadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultAct conActividad = new frmConsultAct();
+            conActividad.ShowDialog();
+        }
     }
 }

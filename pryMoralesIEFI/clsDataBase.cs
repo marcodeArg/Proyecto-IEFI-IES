@@ -8,6 +8,9 @@ using System.Data;
 using System.Data.OleDb;
 using System.Windows.Forms;
 
+using System.Text.RegularExpressions;
+
+
 namespace pryMoralesIEFI
 {
     internal class clsDataBase
@@ -35,7 +38,7 @@ namespace pryMoralesIEFI
         public string Sql { get { return sql; } set { sql = value; } }
 
         //METODOS
-        public void ShowInGrid(DataGridView grid, string sql)
+        public void ShowInGrid(DataGridView grid, string sqls)
         {
             dbConnection = new OleDbConnection(stringConnection);
 
@@ -43,7 +46,7 @@ namespace pryMoralesIEFI
             {
                 dbConnection.Open();
                 
-                dbCommand = new OleDbCommand(sql, dbConnection);
+                dbCommand = new OleDbCommand(sqls, dbConnection);
                 dbAdapter = new OleDbDataAdapter(dbCommand);
                 dataBase = new DataSet();
 
@@ -96,7 +99,7 @@ namespace pryMoralesIEFI
             }
         }
 
-
+        //Saber si un DNI ya existe para poder modificarlo o eliminarlo. Tambien para que no se ingrese un dni repetido
         public bool Exist(int cod)
         {
             dbConnection = new OleDbConnection(stringConnection);
@@ -141,7 +144,80 @@ namespace pryMoralesIEFI
 
 
 
+        //Manejo de inputs
+
+        //Numeros enteros
+        public bool IsNumber(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            return e.Handled;
+        }
 
 
+        //Letras y espacio
+        public bool IsText(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+
+            return e.Handled;
+        }
+
+
+
+
+
+
+        public int mayor;
+        public int menor;
+        public int total = 0;
+        public int promedio;
+        public int cant = 0;
+
+        //MOVER A CLASES
+        public void Mayor()
+        {
+            dbConnection = new OleDbConnection(stringConnection);
+            dbCommand = new OleDbCommand(Sql, dbConnection);
+
+            dbConnection.Open();
+            dbReader = dbCommand.ExecuteReader();
+
+
+            //Para que agarre el primer registro
+            if(dbReader.Read())
+            {
+                mayor = Convert.ToInt32(dbReader.GetValue(2));
+                menor = Convert.ToInt32(dbReader.GetValue(2));
+            }
+
+
+            while (dbReader.Read())
+            {
+                int saldo = Convert.ToInt32(dbReader["Saldo"]);
+
+                if (saldo > mayor)
+                {
+                    mayor = saldo;
+                }
+
+                if (saldo < menor)
+                {
+                    menor = saldo;
+                }
+
+                total += saldo;
+                cant++;
+            }
+            promedio = total / cant;
+            dbConnection.Close();
+        }
     }
 }
