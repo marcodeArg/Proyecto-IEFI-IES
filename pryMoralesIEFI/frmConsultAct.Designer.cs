@@ -39,14 +39,16 @@
             this.txtTotBalance = new System.Windows.Forms.TextBox();
             this.txtLowBalance = new System.Windows.Forms.TextBox();
             this.txtHigBalance = new System.Windows.Forms.TextBox();
-            this.btnShow = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
             // 
             // lblActivity
             // 
             this.lblActivity.AutoSize = true;
-            this.lblActivity.Location = new System.Drawing.Point(24, 24);
+            this.lblActivity.Location = new System.Drawing.Point(17, 24);
             this.lblActivity.Name = "lblActivity";
             this.lblActivity.Size = new System.Drawing.Size(73, 20);
             this.lblActivity.TabIndex = 0;
@@ -55,14 +57,11 @@
             // lstActivity
             // 
             this.lstActivity.FormattingEnabled = true;
-            this.lstActivity.Location = new System.Drawing.Point(132, 21);
+            this.lstActivity.Location = new System.Drawing.Point(125, 21);
             this.lstActivity.Name = "lstActivity";
             this.lstActivity.Size = new System.Drawing.Size(295, 28);
             this.lstActivity.TabIndex = 1;
-            this.lstActivity.SelectedIndexChanged += new System.EventHandler(this.lstActivity_SelectedIndexChanged);
             this.lstActivity.SelectionChangeCommitted += new System.EventHandler(this.lstActivity_SelectionChangeCommitted);
-            this.lstActivity.TextUpdate += new System.EventHandler(this.lstActivity_TextUpdate);
-            this.lstActivity.DisplayMemberChanged += new System.EventHandler(this.lstActivity_DisplayMemberChanged);
             // 
             // dgvClient
             // 
@@ -70,7 +69,7 @@
             this.dgvClient.AllowUserToDeleteRows = false;
             this.dgvClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Location = new System.Drawing.Point(28, 66);
+            this.dgvClient.Location = new System.Drawing.Point(21, 66);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
             this.dgvClient.Size = new System.Drawing.Size(399, 179);
@@ -79,7 +78,7 @@
             // lblHigBalance
             // 
             this.lblHigBalance.AutoSize = true;
-            this.lblHigBalance.Location = new System.Drawing.Point(453, 66);
+            this.lblHigBalance.Location = new System.Drawing.Point(446, 66);
             this.lblHigBalance.Name = "lblHigBalance";
             this.lblHigBalance.Size = new System.Drawing.Size(94, 20);
             this.lblHigBalance.TabIndex = 3;
@@ -88,7 +87,7 @@
             // lblLowBalance
             // 
             this.lblLowBalance.AutoSize = true;
-            this.lblLowBalance.Location = new System.Drawing.Point(453, 119);
+            this.lblLowBalance.Location = new System.Drawing.Point(446, 119);
             this.lblLowBalance.Name = "lblLowBalance";
             this.lblLowBalance.Size = new System.Drawing.Size(96, 20);
             this.lblLowBalance.TabIndex = 4;
@@ -97,7 +96,7 @@
             // lblTotBlance
             // 
             this.lblTotBlance.AutoSize = true;
-            this.lblTotBlance.Location = new System.Drawing.Point(453, 172);
+            this.lblTotBlance.Location = new System.Drawing.Point(446, 172);
             this.lblTotBlance.Name = "lblTotBlance";
             this.lblTotBlance.Size = new System.Drawing.Size(116, 20);
             this.lblTotBlance.TabIndex = 5;
@@ -106,7 +105,7 @@
             // lblAvgBalance
             // 
             this.lblAvgBalance.AutoSize = true;
-            this.lblAvgBalance.Location = new System.Drawing.Point(453, 225);
+            this.lblAvgBalance.Location = new System.Drawing.Point(446, 225);
             this.lblAvgBalance.Name = "lblAvgBalance";
             this.lblAvgBalance.Size = new System.Drawing.Size(148, 20);
             this.lblAvgBalance.TabIndex = 6;
@@ -114,7 +113,7 @@
             // 
             // txtAvgBalance
             // 
-            this.txtAvgBalance.Location = new System.Drawing.Point(619, 222);
+            this.txtAvgBalance.Location = new System.Drawing.Point(612, 222);
             this.txtAvgBalance.Name = "txtAvgBalance";
             this.txtAvgBalance.ReadOnly = true;
             this.txtAvgBalance.Size = new System.Drawing.Size(119, 26);
@@ -122,7 +121,7 @@
             // 
             // txtTotBalance
             // 
-            this.txtTotBalance.Location = new System.Drawing.Point(619, 168);
+            this.txtTotBalance.Location = new System.Drawing.Point(612, 168);
             this.txtTotBalance.Name = "txtTotBalance";
             this.txtTotBalance.ReadOnly = true;
             this.txtTotBalance.Size = new System.Drawing.Size(119, 26);
@@ -130,7 +129,7 @@
             // 
             // txtLowBalance
             // 
-            this.txtLowBalance.Location = new System.Drawing.Point(619, 116);
+            this.txtLowBalance.Location = new System.Drawing.Point(612, 116);
             this.txtLowBalance.Name = "txtLowBalance";
             this.txtLowBalance.ReadOnly = true;
             this.txtLowBalance.Size = new System.Drawing.Size(119, 26);
@@ -138,28 +137,50 @@
             // 
             // txtHigBalance
             // 
-            this.txtHigBalance.Location = new System.Drawing.Point(619, 63);
+            this.txtHigBalance.Location = new System.Drawing.Point(612, 63);
             this.txtHigBalance.Name = "txtHigBalance";
             this.txtHigBalance.ReadOnly = true;
             this.txtHigBalance.Size = new System.Drawing.Size(119, 26);
             this.txtHigBalance.TabIndex = 10;
             // 
-            // btnShow
+            // btnPrint
             // 
-            this.btnShow.Location = new System.Drawing.Point(28, 272);
-            this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(86, 27);
-            this.btnShow.TabIndex = 11;
-            this.btnShow.Text = "Listar";
-            this.btnShow.UseVisualStyleBackColor = true;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
+            this.btnPrint.Location = new System.Drawing.Point(641, 273);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(90, 33);
+            this.btnPrint.TabIndex = 11;
+            this.btnPrint.Text = "Imprimir";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(486, 273);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(136, 33);
+            this.btnExport.TabIndex = 12;
+            this.btnExport.Text = "Generar reporte";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(386, 273);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(77, 33);
+            this.btnClose.TabIndex = 13;
+            this.btnClose.Text = "Salir";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmConsultAct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 447);
-            this.Controls.Add(this.btnShow);
+            this.ClientSize = new System.Drawing.Size(753, 326);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.txtHigBalance);
             this.Controls.Add(this.txtLowBalance);
             this.Controls.Add(this.txtTotBalance);
@@ -196,6 +217,8 @@
         private System.Windows.Forms.TextBox txtTotBalance;
         private System.Windows.Forms.TextBox txtLowBalance;
         private System.Windows.Forms.TextBox txtHigBalance;
-        private System.Windows.Forms.Button btnShow;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnClose;
     }
 }

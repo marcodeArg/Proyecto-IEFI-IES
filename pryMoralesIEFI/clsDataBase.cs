@@ -15,6 +15,7 @@ namespace pryMoralesIEFI
 {
     internal class clsDataBase
     {
+        //Variables para la base de datos
         private OleDbConnection dbConnection;
         private OleDbCommand dbCommand;
         private OleDbDataAdapter dbAdapter;
@@ -26,6 +27,13 @@ namespace pryMoralesIEFI
         private string sql;
 
 
+        //Variables para otros metodos
+        private int higher;
+        private int lower;
+        private int total = 0;
+        private int counter = 0;
+
+        //Metodos getter y setter para la base de datos
         public OleDbConnection DbConnection { get { return dbConnection; } set { dbConnection = value; } }
         public OleDbCommand DbCommand { get { return dbCommand; } set { dbCommand = value; } }
         public OleDbDataAdapter DbAdapter { get { return dbAdapter; } set { dbAdapter = value; } }
@@ -36,6 +44,14 @@ namespace pryMoralesIEFI
         public string TableName { get { return tableName; } set { tableName = value; } }
         public string StringConnection { get { return stringConnection; } }
         public string Sql { get { return sql; } set { sql = value; } }
+
+
+        //Metodos getter y setter para otros metodos
+        public int Higher { get { return higher; } set { higher = value; } }
+        public int Lower { get { return lower; } set { lower = value; } }
+        public int Total { get { return total; } set { total = value; } }
+        public int Counter { get { return counter; } set { counter = value; } }
+
 
         //METODOS
         public void ShowInGrid(DataGridView grid, string sqls)
@@ -175,11 +191,7 @@ namespace pryMoralesIEFI
 
 
 
-        public int mayor;
-        public int menor;
-        public int total = 0;
-        public int promedio;
-        public int cant = 0;
+        
 
         //MOVER A CLASES
         public void Mayor()
@@ -194,29 +206,33 @@ namespace pryMoralesIEFI
             //Para que agarre el primer registro
             if(dbReader.Read())
             {
-                mayor = Convert.ToInt32(dbReader.GetValue(2));
-                menor = Convert.ToInt32(dbReader.GetValue(2));
+                higher = Convert.ToInt32(dbReader.GetValue(2));
+                lower = Convert.ToInt32(dbReader.GetValue(2));
             }
+
+            dbReader.Close();
+            dbReader = dbCommand.ExecuteReader();
 
 
             while (dbReader.Read())
             {
                 int saldo = Convert.ToInt32(dbReader["Saldo"]);
 
-                if (saldo > mayor)
+                if (saldo > higher)
                 {
-                    mayor = saldo;
+                    higher = saldo;
                 }
 
-                if (saldo < menor)
+                if (saldo < lower)
                 {
-                    menor = saldo;
+                    lower = saldo;
                 }
 
                 total += saldo;
-                cant++;
+                counter++;
             }
-            promedio = total / cant;
+
+            dbReader.Close();
             dbConnection.Close();
         }
     }
