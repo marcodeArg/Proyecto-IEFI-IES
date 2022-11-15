@@ -33,7 +33,7 @@ namespace pryMoralesIEFI
 
 
             //Obtener el mayor, menor y promedio
-            client.Mayor();
+            client.GetInfoClient();
 
             txtHigBalance.Text = client.Higher.ToString();
             txtTotBalance.Text = client.Total.ToString();
@@ -55,7 +55,7 @@ namespace pryMoralesIEFI
 
 
             //Actualizar el mayor, menor y promedio cuando se seleccione otra actividad
-            client.Mayor();
+            client.GetInfoClient();
 
             txtHigBalance.Text = client.Higher.ToString();
             txtTotBalance.Text = client.Total.ToString();

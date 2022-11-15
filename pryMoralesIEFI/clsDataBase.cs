@@ -194,7 +194,7 @@ namespace pryMoralesIEFI
         
 
         //MOVER A CLASES
-        public void Mayor()
+        public void GetInfoClient()
         {
             dbConnection = new OleDbConnection(stringConnection);
             dbCommand = new OleDbCommand(Sql, dbConnection);
