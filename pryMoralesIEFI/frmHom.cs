@@ -44,5 +44,11 @@ namespace pryMoralesIEFI
             frmConsultAct conActividad = new frmConsultAct();
             conActividad.ShowDialog();
         }
+
+        private void consultaPorBarrioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultNei conNeighbour = new frmConsultNei();
+            conNeighbour.ShowDialog();
+        }
     }
 }

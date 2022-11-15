@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,24 +10,24 @@ using System.Windows.Forms;
 
 namespace pryMoralesIEFI
 {
-    public partial class frmConsultAct : Form
+    public partial class frmConsultNei : Form
     {
-        public frmConsultAct()
+        public frmConsultNei()
         {
             InitializeComponent();
         }
 
-        clsActivity activity = new clsActivity("Actividad");
+        clsNeighbour neighbour = new clsNeighbour("Barrio");
         clsClient client = new clsClient("Socio");
 
-        private void frmConsultAct_Load(object sender, EventArgs e)
+        private void frmConsultNei_Load(object sender, EventArgs e)
         {
-            activity.ShowInList(lstActivity, "Detalle_Actividad", "Codigo_Actividad");
+            //cargar en el comboBox con los barrios
+            neighbour.ShowInList(lstNeighbour, "Detalle_Barrio", "Codigo_Barrio");
 
+            int elec = Convert.ToInt32(lstNeighbour.SelectedValue);
 
-            int elec = Convert.ToInt32(lstActivity.SelectedValue);
-
-            client.Sql = "SELECT Dni_Socio AS DNI, Nombre_Apellido AS Nombre, Saldo FROM Socio WHERE Codigo_Actividad=" + elec;
+            client.Sql = "SELECT Dni_Socio AS DNI, Nombre_Apellido AS Nombre, Saldo FROM Socio WHERE Codigo_Barrio=" + elec;
             client.ShowInGrid(dgvClient, client.Sql);
 
 
@@ -43,18 +42,18 @@ namespace pryMoralesIEFI
             txtAvgBalance.Text = (client.Total / client.Counter).ToString();
             client.Total = 0;
             client.Counter = 0;
-
         }
 
-        private void lstActivity_SelectionChangeCommitted(object sender, EventArgs e)
+        //mantener actualizada la grilla
+        private void lstNeighbour_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            int elec = Convert.ToInt32(lstActivity.SelectedValue);
+            int elec = Convert.ToInt32(lstNeighbour.SelectedValue);
 
-            client.Sql = "SELECT Dni_Socio AS DNI, Nombre_Apellido AS Nombre, Saldo FROM Socio WHERE Codigo_Actividad=" + elec;
+            client.Sql = "SELECT Dni_Socio AS DNI, Nombre_Apellido AS Nombre, Saldo FROM Socio WHERE Codigo_Barrio=" + elec;
             client.ShowInGrid(dgvClient, client.Sql);
 
 
-            //Actualizar el mayor, menor y promedio cuando se seleccione otra actividad
+            //Obtener el mayor, menor y promedio
             client.GetInfoClient();
 
             txtHigBalance.Text = client.Higher.ToString();
@@ -65,22 +64,7 @@ namespace pryMoralesIEFI
             txtAvgBalance.Text = (client.Total / client.Counter).ToString();
             client.Total = 0;
             client.Counter = 0;
-
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

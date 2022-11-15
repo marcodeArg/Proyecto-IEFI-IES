@@ -34,11 +34,11 @@
             this.actividadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultaTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorActividadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorBarrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorSaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.consultaTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,21 +67,21 @@
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // actividadesToolStripMenuItem
             // 
             this.actividadesToolStripMenuItem.Name = "actividadesToolStripMenuItem";
-            this.actividadesToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.actividadesToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.actividadesToolStripMenuItem.Text = "Actividades";
             this.actividadesToolStripMenuItem.Click += new System.EventHandler(this.actividadesToolStripMenuItem_Click);
             // 
             // barrioToolStripMenuItem
             // 
             this.barrioToolStripMenuItem.Name = "barrioToolStripMenuItem";
-            this.barrioToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.barrioToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.barrioToolStripMenuItem.Text = "Barrios";
             this.barrioToolStripMenuItem.Click += new System.EventHandler(this.barrioToolStripMenuItem_Click);
             // 
@@ -97,12 +97,6 @@
             this.consultasToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
             this.consultasToolStripMenuItem.Text = "Consultas";
             // 
-            // consultaTotalToolStripMenuItem
-            // 
-            this.consultaTotalToolStripMenuItem.Name = "consultaTotalToolStripMenuItem";
-            this.consultaTotalToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
-            this.consultaTotalToolStripMenuItem.Text = "Consulta total";
-            // 
             // consultaPorActividadToolStripMenuItem
             // 
             this.consultaPorActividadToolStripMenuItem.Name = "consultaPorActividadToolStripMenuItem";
@@ -115,6 +109,7 @@
             this.consultaPorBarrioToolStripMenuItem.Name = "consultaPorBarrioToolStripMenuItem";
             this.consultaPorBarrioToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.consultaPorBarrioToolStripMenuItem.Text = "Consulta por barrio";
+            this.consultaPorBarrioToolStripMenuItem.Click += new System.EventHandler(this.consultaPorBarrioToolStripMenuItem_Click);
             // 
             // consultaPorSaldoToolStripMenuItem
             // 
@@ -126,6 +121,12 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
+            // 
+            // consultaTotalToolStripMenuItem
+            // 
+            this.consultaTotalToolStripMenuItem.Name = "consultaTotalToolStripMenuItem";
+            this.consultaTotalToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultaTotalToolStripMenuItem.Text = "Consulta total";
             // 
             // frmHom
             // 

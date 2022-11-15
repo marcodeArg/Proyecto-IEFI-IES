@@ -42,6 +42,8 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.txtCant = new System.Windows.Forms.TextBox();
+            this.lblCant = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,13 +74,13 @@
             this.dgvClient.Location = new System.Drawing.Point(21, 66);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
-            this.dgvClient.Size = new System.Drawing.Size(399, 179);
+            this.dgvClient.Size = new System.Drawing.Size(399, 204);
             this.dgvClient.TabIndex = 2;
             // 
             // lblHigBalance
             // 
             this.lblHigBalance.AutoSize = true;
-            this.lblHigBalance.Location = new System.Drawing.Point(446, 66);
+            this.lblHigBalance.Location = new System.Drawing.Point(447, 66);
             this.lblHigBalance.Name = "lblHigBalance";
             this.lblHigBalance.Size = new System.Drawing.Size(94, 20);
             this.lblHigBalance.TabIndex = 3;
@@ -87,7 +89,7 @@
             // lblLowBalance
             // 
             this.lblLowBalance.AutoSize = true;
-            this.lblLowBalance.Location = new System.Drawing.Point(446, 119);
+            this.lblLowBalance.Location = new System.Drawing.Point(447, 112);
             this.lblLowBalance.Name = "lblLowBalance";
             this.lblLowBalance.Size = new System.Drawing.Size(96, 20);
             this.lblLowBalance.TabIndex = 4;
@@ -96,7 +98,7 @@
             // lblTotBlance
             // 
             this.lblTotBlance.AutoSize = true;
-            this.lblTotBlance.Location = new System.Drawing.Point(446, 172);
+            this.lblTotBlance.Location = new System.Drawing.Point(447, 158);
             this.lblTotBlance.Name = "lblTotBlance";
             this.lblTotBlance.Size = new System.Drawing.Size(116, 20);
             this.lblTotBlance.TabIndex = 5;
@@ -105,7 +107,7 @@
             // lblAvgBalance
             // 
             this.lblAvgBalance.AutoSize = true;
-            this.lblAvgBalance.Location = new System.Drawing.Point(446, 225);
+            this.lblAvgBalance.Location = new System.Drawing.Point(447, 250);
             this.lblAvgBalance.Name = "lblAvgBalance";
             this.lblAvgBalance.Size = new System.Drawing.Size(148, 20);
             this.lblAvgBalance.TabIndex = 6;
@@ -113,7 +115,7 @@
             // 
             // txtAvgBalance
             // 
-            this.txtAvgBalance.Location = new System.Drawing.Point(612, 222);
+            this.txtAvgBalance.Location = new System.Drawing.Point(625, 247);
             this.txtAvgBalance.Name = "txtAvgBalance";
             this.txtAvgBalance.ReadOnly = true;
             this.txtAvgBalance.Size = new System.Drawing.Size(119, 26);
@@ -121,7 +123,7 @@
             // 
             // txtTotBalance
             // 
-            this.txtTotBalance.Location = new System.Drawing.Point(612, 168);
+            this.txtTotBalance.Location = new System.Drawing.Point(625, 155);
             this.txtTotBalance.Name = "txtTotBalance";
             this.txtTotBalance.ReadOnly = true;
             this.txtTotBalance.Size = new System.Drawing.Size(119, 26);
@@ -129,7 +131,7 @@
             // 
             // txtLowBalance
             // 
-            this.txtLowBalance.Location = new System.Drawing.Point(612, 116);
+            this.txtLowBalance.Location = new System.Drawing.Point(625, 109);
             this.txtLowBalance.Name = "txtLowBalance";
             this.txtLowBalance.ReadOnly = true;
             this.txtLowBalance.Size = new System.Drawing.Size(119, 26);
@@ -137,7 +139,7 @@
             // 
             // txtHigBalance
             // 
-            this.txtHigBalance.Location = new System.Drawing.Point(612, 63);
+            this.txtHigBalance.Location = new System.Drawing.Point(625, 63);
             this.txtHigBalance.Name = "txtHigBalance";
             this.txtHigBalance.ReadOnly = true;
             this.txtHigBalance.Size = new System.Drawing.Size(119, 26);
@@ -145,7 +147,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(641, 273);
+            this.btnPrint.Location = new System.Drawing.Point(654, 293);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(90, 33);
             this.btnPrint.TabIndex = 11;
@@ -155,7 +157,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(486, 273);
+            this.btnExport.Location = new System.Drawing.Point(499, 293);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(136, 33);
             this.btnExport.TabIndex = 12;
@@ -165,7 +167,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(386, 273);
+            this.btnClose.Location = new System.Drawing.Point(399, 293);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(77, 33);
             this.btnClose.TabIndex = 13;
@@ -173,11 +175,30 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // txtCant
+            // 
+            this.txtCant.Location = new System.Drawing.Point(625, 201);
+            this.txtCant.Name = "txtCant";
+            this.txtCant.ReadOnly = true;
+            this.txtCant.Size = new System.Drawing.Size(119, 26);
+            this.txtCant.TabIndex = 15;
+            // 
+            // lblCant
+            // 
+            this.lblCant.AutoSize = true;
+            this.lblCant.Location = new System.Drawing.Point(447, 204);
+            this.lblCant.Name = "lblCant";
+            this.lblCant.Size = new System.Drawing.Size(165, 20);
+            this.lblCant.TabIndex = 14;
+            this.lblCant.Text = "Cantidad de personas";
+            // 
             // frmConsultAct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 326);
+            this.ClientSize = new System.Drawing.Size(764, 346);
+            this.Controls.Add(this.txtCant);
+            this.Controls.Add(this.lblCant);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnPrint);
@@ -220,5 +241,7 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txtCant;
+        private System.Windows.Forms.Label lblCant;
     }
 }
