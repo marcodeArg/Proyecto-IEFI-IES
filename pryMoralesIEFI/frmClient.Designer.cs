@@ -302,7 +302,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDNISearch;
-        private System.Windows.Forms.DataGridView dgvClient;
         private System.Windows.Forms.Label lblDNI;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblAddress;
@@ -322,5 +321,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.DataGridView dgvClient;
     }
 }

@@ -50,5 +50,11 @@ namespace pryMoralesIEFI
             frmConsultNei conNeighbour = new frmConsultNei();
             conNeighbour.ShowDialog();
         }
+
+        private void consultarPorClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultCli conClient = new frmConsultCli();
+            conClient.ShowDialog();
+        }
     }
 }

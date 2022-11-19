@@ -39,6 +39,7 @@
             this.consultaPorSaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.consultaTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarPorClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +90,7 @@
             // 
             this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultaPorActividadToolStripMenuItem,
+            this.consultarPorClienteToolStripMenuItem,
             this.consultaPorBarrioToolStripMenuItem,
             this.consultaPorSaldoToolStripMenuItem,
             this.toolStripSeparator1,
@@ -128,6 +130,13 @@
             this.consultaTotalToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.consultaTotalToolStripMenuItem.Text = "Consulta total";
             // 
+            // consultarPorClienteToolStripMenuItem
+            // 
+            this.consultarPorClienteToolStripMenuItem.Name = "consultarPorClienteToolStripMenuItem";
+            this.consultarPorClienteToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultarPorClienteToolStripMenuItem.Text = "Consultar por cliente";
+            this.consultarPorClienteToolStripMenuItem.Click += new System.EventHandler(this.consultarPorClienteToolStripMenuItem_Click);
+            // 
             // frmHom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -159,6 +168,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultaPorSaldoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem consultaTotalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarPorClienteToolStripMenuItem;
     }
 }
 
