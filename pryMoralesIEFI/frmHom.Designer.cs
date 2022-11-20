@@ -35,11 +35,11 @@
             this.barrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorActividadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarPorClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorBarrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaPorSaldoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.consultaTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultarPorClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +106,13 @@
             this.consultaPorActividadToolStripMenuItem.Text = "Consulta por actividad";
             this.consultaPorActividadToolStripMenuItem.Click += new System.EventHandler(this.consultaPorActividadToolStripMenuItem_Click);
             // 
+            // consultarPorClienteToolStripMenuItem
+            // 
+            this.consultarPorClienteToolStripMenuItem.Name = "consultarPorClienteToolStripMenuItem";
+            this.consultarPorClienteToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.consultarPorClienteToolStripMenuItem.Text = "Consultar por cliente";
+            this.consultarPorClienteToolStripMenuItem.Click += new System.EventHandler(this.consultarPorClienteToolStripMenuItem_Click);
+            // 
             // consultaPorBarrioToolStripMenuItem
             // 
             this.consultaPorBarrioToolStripMenuItem.Name = "consultaPorBarrioToolStripMenuItem";
@@ -129,13 +136,7 @@
             this.consultaTotalToolStripMenuItem.Name = "consultaTotalToolStripMenuItem";
             this.consultaTotalToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.consultaTotalToolStripMenuItem.Text = "Consulta total";
-            // 
-            // consultarPorClienteToolStripMenuItem
-            // 
-            this.consultarPorClienteToolStripMenuItem.Name = "consultarPorClienteToolStripMenuItem";
-            this.consultarPorClienteToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
-            this.consultarPorClienteToolStripMenuItem.Text = "Consultar por cliente";
-            this.consultarPorClienteToolStripMenuItem.Click += new System.EventHandler(this.consultarPorClienteToolStripMenuItem_Click);
+            this.consultaTotalToolStripMenuItem.Click += new System.EventHandler(this.consultaTotalToolStripMenuItem_Click);
             // 
             // frmHom
             // 

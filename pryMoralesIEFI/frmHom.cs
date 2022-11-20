@@ -56,5 +56,11 @@ namespace pryMoralesIEFI
             frmConsultCli conClient = new frmConsultCli();
             conClient.ShowDialog();
         }
+
+        private void consultaTotalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultAll conAll = new frmConsultAll();
+            conAll.ShowDialog();
+        }
     }
 }

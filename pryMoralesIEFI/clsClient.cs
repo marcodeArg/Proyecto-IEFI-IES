@@ -72,6 +72,38 @@ namespace pryMoralesIEFI
             }
         }
 
+
+        public void ShowAllClients(DataGridView grid)
+        {
+            DbConnection = new OleDbConnection(StringConnection);
+            Sql = "SELECT Dni_Socio AS DNI,Nombre_Apellido AS Nombre,Direccion,Codigo_Barrio AS Barrio,Codigo_Actividad AS Actividad,Saldo FROM Socio";
+
+            DbCommand = new OleDbCommand(Sql, DbConnection);
+
+            try
+            {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                while (DbReader.Read())
+                {
+
+                    //PASAR TODO A UN ADAPTER Y DESPUES MANDARLO A LA GRID
+                    grid.CurrentRow.Cells["DNI"].Value = Convert.ToInt32(DbReader["DNI"]);
+                    grid.CurrentRow.Cells["Nombre"].Value = DbReader["Nombre"].ToString();
+                    grid.CurrentRow.Cells["Direccion"].Value = DbReader["Nombre"].ToString();
+                    barrio(Convert.ToInt32(DbReader["DNI"]), grid);
+                    actividad(Convert.ToInt32(DbReader["DNI"]), grid);
+                    grid.CurrentRow.Cells["Saldo"].Value = Convert.ToInt32(DbReader["Saldo"]);
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Se produjo un error(GENERAL):\n" + err.Message);
+            }
+        }
+
         public void InsertClient()
         {
             Sql = "INSERT INTO Socio (Dni_Socio, Nombre_Apellido, Direccion, Codigo_Barrio, Codigo_Actividad, Saldo) VALUES (@dni,@name,@address,@codNei,@codAct,@balance)";
@@ -161,5 +193,63 @@ namespace pryMoralesIEFI
         }   
 
 
+        //
+        private void barrio(int codigo, DataGridView grilla)
+        {
+            OleDbConnection connection = new OleDbConnection(StringConnection);
+            OleDbCommand command = new OleDbCommand("SELECT * FROM Barrio", connection);
+            OleDbDataReader reader;
+
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+
+                while(reader.Read() && Convert.ToInt32(reader["Codigo_Barrio"]) != codigo)
+                {
+                    //Leer
+                }
+
+                grilla.CurrentRow.Cells["Barrio"].Value = reader["Detalle_Barrio"].ToString();
+
+                reader.Close();
+                connection.Close();
+
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Se produjo un error(BARRIO):\n" + err.Message);
+            }
+        }
+
+        private void actividad(int codigo, DataGridView grilla)
+        {
+            OleDbConnection connection = new OleDbConnection(StringConnection);
+            OleDbCommand command = new OleDbCommand("SELECT * FROM Actividad", connection);
+            OleDbDataReader reader;
+
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+
+                while (reader.Read() && Convert.ToInt32(reader["Codigo_Actividad"]) != codigo)
+                {
+                    //Leer
+                }
+
+                grilla.CurrentRow.Cells["Actividad"].Value = reader["Detalle_Actividad"].ToString();
+
+                reader.Close();
+                connection.Close();
+
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Se produjo un error(ACTIVIDAD):\n" + err.Message);
+            }
+        }
     }
 }

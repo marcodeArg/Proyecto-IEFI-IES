@@ -68,6 +68,12 @@
     <Compile Include="frmConsultAct.Designer.cs">
       <DependentUpon>frmConsultAct.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmConsultAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultAll.Designer.cs">
+      <DependentUpon>frmConsultAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConsultCli.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultAct.resx">
       <DependentUpon>frmConsultAct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultAll.resx">
+      <DependentUpon>frmConsultAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultCli.resx">
       <DependentUpon>frmConsultCli.cs</DependentUpon>
