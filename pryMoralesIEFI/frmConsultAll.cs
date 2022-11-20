@@ -17,9 +17,19 @@ namespace pryMoralesIEFI
             InitializeComponent();
         }
 
+        clsClient client = new clsClient("Socio");
+
         private void frmConsultAll_Load(object sender, EventArgs e)
         {
-            clsClient client = new clsClient("Socio");
+            client.GridStyle(dgvAllClients);
+
+
+            dgvAllClients.Columns.Add("DNI", "DNI");
+            dgvAllClients.Columns.Add("Nombre", "Nombre");
+            dgvAllClients.Columns.Add("Direccion", "Direccion");
+            dgvAllClients.Columns.Add("Barrio", "Barrio");
+            dgvAllClients.Columns.Add("Actividad", "Actividad");
+            dgvAllClients.Columns.Add("Saldo", "Saldo");
 
             client.ShowAllClients(dgvAllClients);
         }

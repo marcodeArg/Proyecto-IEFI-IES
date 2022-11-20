@@ -75,8 +75,10 @@ namespace pryMoralesIEFI
 
         public void ShowAllClients(DataGridView grid)
         {
+
             DbConnection = new OleDbConnection(StringConnection);
             Sql = "SELECT Dni_Socio AS DNI,Nombre_Apellido AS Nombre,Direccion,Codigo_Barrio AS Barrio,Codigo_Actividad AS Actividad,Saldo FROM Socio";
+            int fg = 0;
 
             DbCommand = new OleDbCommand(Sql, DbConnection);
 
@@ -88,19 +90,23 @@ namespace pryMoralesIEFI
                 while (DbReader.Read())
                 {
 
+                    grid.Rows.Add();
+
                     //PASAR TODO A UN ADAPTER Y DESPUES MANDARLO A LA GRID
-                    grid.CurrentRow.Cells["DNI"].Value = Convert.ToInt32(DbReader["DNI"]);
-                    grid.CurrentRow.Cells["Nombre"].Value = DbReader["Nombre"].ToString();
-                    grid.CurrentRow.Cells["Direccion"].Value = DbReader["Nombre"].ToString();
-                    barrio(Convert.ToInt32(DbReader["DNI"]), grid);
-                    actividad(Convert.ToInt32(DbReader["DNI"]), grid);
-                    grid.CurrentRow.Cells["Saldo"].Value = Convert.ToInt32(DbReader["Saldo"]);
+                    grid.Rows[fg].Cells["DNI"].Value = Convert.ToInt32(DbReader["DNI"]);
+                    grid.Rows[fg].Cells["Nombre"].Value = DbReader["Nombre"].ToString();
+                    grid.Rows[fg].Cells["Direccion"].Value = DbReader["Direccion"].ToString();
+                    grid.Rows[fg].Cells["Barrio"].Value = GetNeighborhood(Convert.ToInt32(DbReader["Barrio"]));
+                    grid.Rows[fg].Cells["Actividad"].Value = GetActivity(Convert.ToInt32(DbReader["Actividad"]));
+                    grid.Rows[fg].Cells["Saldo"].Value = Convert.ToInt32(DbReader["Saldo"]);
+
+                    fg++;
                 }
 
             }
             catch (Exception err)
             {
-                MessageBox.Show("Se produjo un error(GENERAL):\n" + err.Message);
+                MessageBox.Show("Se produjo al cargar la información en la grilla:\n" + err.Message);
             }
         }
 
@@ -193,8 +199,8 @@ namespace pryMoralesIEFI
         }   
 
 
-        //
-        private void barrio(int codigo, DataGridView grilla)
+        //PROCEDIMIENTOS USADOS EN PROCEDIMIENTOS PUBLICOS
+        private string GetNeighborhood(int code)
         {
             OleDbConnection connection = new OleDbConnection(StringConnection);
             OleDbCommand command = new OleDbCommand("SELECT * FROM Barrio", connection);
@@ -205,25 +211,27 @@ namespace pryMoralesIEFI
                 connection.Open();
                 reader = command.ExecuteReader();
 
-                while(reader.Read() && Convert.ToInt32(reader["Codigo_Barrio"]) != codigo)
+                while(reader.Read() && Convert.ToInt32(reader["Codigo_Barrio"]) != code)
                 {
                     //Leer
                 }
 
-                grilla.CurrentRow.Cells["Barrio"].Value = reader["Detalle_Barrio"].ToString();
+                string varNeighborhood = reader["Detalle_Barrio"].ToString();
 
                 reader.Close();
                 connection.Close();
 
-
+                return varNeighborhood;
             }
             catch (Exception err)
             {
                 MessageBox.Show("Se produjo un error(BARRIO):\n" + err.Message);
             }
+
+            return null;
         }
 
-        private void actividad(int codigo, DataGridView grilla)
+        private string GetActivity(int code)
         {
             OleDbConnection connection = new OleDbConnection(StringConnection);
             OleDbCommand command = new OleDbCommand("SELECT * FROM Actividad", connection);
@@ -234,15 +242,18 @@ namespace pryMoralesIEFI
                 connection.Open();
                 reader = command.ExecuteReader();
 
-                while (reader.Read() && Convert.ToInt32(reader["Codigo_Actividad"]) != codigo)
+                while (reader.Read() && Convert.ToInt32(reader["Codigo_Actividad"]) != code)
                 {
                     //Leer
                 }
 
-                grilla.CurrentRow.Cells["Actividad"].Value = reader["Detalle_Actividad"].ToString();
+
+                string varActivity = reader["Detalle_Actividad"].ToString();
 
                 reader.Close();
                 connection.Close();
+
+                return varActivity;
 
 
             }
@@ -250,6 +261,8 @@ namespace pryMoralesIEFI
             {
                 MessageBox.Show("Se produjo un error(ACTIVIDAD):\n" + err.Message);
             }
+
+            return null;
         }
     }
 }

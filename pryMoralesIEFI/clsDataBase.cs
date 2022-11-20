@@ -160,6 +160,24 @@ namespace pryMoralesIEFI
 
 
 
+        //Estilo de la grilla
+        public void GridStyle(DataGridView grid)
+        {
+            //grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            grid.AllowUserToResizeRows = false;
+            grid.AllowUserToResizeColumns = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.RowHeadersVisible = false;
+
+            Padding newPadding = new Padding(2, 5, 2, 5);
+            grid.RowTemplate.DefaultCellStyle.Padding = newPadding;
+
+            grid.MultiSelect = false;
+            grid.RowTemplate.Height = 30;
+        }
+
+
         //Manejo de inputs
 
         //Numeros enteros
