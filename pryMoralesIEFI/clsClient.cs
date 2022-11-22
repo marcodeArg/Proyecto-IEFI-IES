@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.OleDb;
-using System.Data.Common;
 using System.Windows.Forms;
-using System.Data.Odbc;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace pryMoralesIEFI
 {
@@ -82,6 +82,7 @@ namespace pryMoralesIEFI
 
             DbCommand = new OleDbCommand(Sql, DbConnection);
 
+
             try
             {
                 DbConnection.Open();
@@ -96,8 +97,8 @@ namespace pryMoralesIEFI
                     grid.Rows[fg].Cells["DNI"].Value = Convert.ToInt32(DbReader["DNI"]);
                     grid.Rows[fg].Cells["Nombre"].Value = DbReader["Nombre"].ToString();
                     grid.Rows[fg].Cells["Direccion"].Value = DbReader["Direccion"].ToString();
-                    grid.Rows[fg].Cells["Barrio"].Value = GetNeighborhood(Convert.ToInt32(DbReader["Barrio"]));
-                    grid.Rows[fg].Cells["Actividad"].Value = GetActivity(Convert.ToInt32(DbReader["Actividad"]));
+                    grid.Rows[fg].Cells["Barrio"].Value = GetDetail(Convert.ToInt32(DbReader["Barrio"]), "Barrio");
+                    grid.Rows[fg].Cells["Actividad"].Value = GetDetail(Convert.ToInt32(DbReader["Actividad"]), "Actividad");
                     grid.Rows[fg].Cells["Saldo"].Value = Convert.ToInt32(DbReader["Saldo"]);
 
                     fg++;
@@ -198,71 +199,53 @@ namespace pryMoralesIEFI
             }
         }   
 
-
-        //PROCEDIMIENTOS USADOS EN PROCEDIMIENTOS PUBLICOS
-        private string GetNeighborhood(int code)
+        //Terminar imprimir
+        public void PringClient(PrintPageEventArgs e)
         {
-            OleDbConnection connection = new OleDbConnection(StringConnection);
-            OleDbCommand command = new OleDbCommand("SELECT * FROM Barrio", connection);
-            OleDbDataReader reader;
-
             try
             {
-                connection.Open();
-                reader = command.ExecuteReader();
 
-                while(reader.Read() && Convert.ToInt32(reader["Codigo_Barrio"]) != code)
-                {
-                    //Leer
-                }
-
-                string varNeighborhood = reader["Detalle_Barrio"].ToString();
-
-                reader.Close();
-                connection.Close();
-
-                return varNeighborhood;
             }
             catch (Exception err)
             {
-                MessageBox.Show("Se produjo un error(BARRIO):\n" + err.Message);
+                MessageBox.Show("Error al imprimir:" + err.Message);
             }
-
-            return null;
         }
 
-        private string GetActivity(int code)
+        //Generar reporte
+
+
+        //PROCEDIMIENTOS USADOS EN PROCEDIMIENTOS PUBLICOS
+        private string GetDetail(int code, string tn)
         {
             OleDbConnection connection = new OleDbConnection(StringConnection);
-            OleDbCommand command = new OleDbCommand("SELECT * FROM Actividad", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * FROM " + tn, connection);
             OleDbDataReader reader;
+            string varDetail = "";
 
             try
             {
                 connection.Open();
                 reader = command.ExecuteReader();
 
-                while (reader.Read() && Convert.ToInt32(reader["Codigo_Actividad"]) != code)
+                while (reader.Read() && Convert.ToInt32(reader["Codigo_" + tn]) != code)
                 {
                     //Leer
                 }
 
-
-                string varActivity = reader["Detalle_Actividad"].ToString();
+                varDetail = reader["Detalle_" + tn].ToString();
 
                 reader.Close();
                 connection.Close();
-
-                return varActivity;
 
 
             }
             catch (Exception err)
             {
-                MessageBox.Show("Se produjo un error(ACTIVIDAD):\n" + err.Message);
+                MessageBox.Show("Se produjo un error(" + tn +"):\n" + err.Message);
             }
 
-            return null;
+            return varDetail;
         }
     }
 }

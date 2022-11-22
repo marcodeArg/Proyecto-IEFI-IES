@@ -23,6 +23,9 @@ namespace pryMoralesIEFI
 
         private void frmConsultAct_Load(object sender, EventArgs e)
         {
+            activity.GridStyle(dgvClient);
+
+
             activity.ShowInList(lstActivity, "Detalle_Actividad", "Codigo_Actividad");
 
 
@@ -62,6 +65,9 @@ namespace pryMoralesIEFI
             txtLowBalance.Text = client.Lower.ToString();
             txtCant.Text = client.Counter.ToString();
 
+            //REVISAR DIVISION POR CERO
+            //REVISAR DIVISION POR CERO------------------------------------------------------------------------------------------------------------
+            //REVISAR DIVISION POR CERO
             txtAvgBalance.Text = (client.Total / client.Counter).ToString();
             client.Total = 0;
             client.Counter = 0;
@@ -70,7 +76,10 @@ namespace pryMoralesIEFI
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            prtDialog.ShowDialog();
+            prtDocument.PrinterSettings = prtDialog.PrinterSettings;
+            prtDocument.Print();
+            MessageBox.Show("Impreso correctamente");
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -81,6 +90,11 @@ namespace pryMoralesIEFI
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void prtDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            client.PringClient(e);
         }
     }
 }

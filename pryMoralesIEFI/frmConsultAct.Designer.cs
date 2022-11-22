@@ -44,6 +44,8 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
+            this.prtDialog = new System.Windows.Forms.PrintDialog();
+            this.prtDocument = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,6 +194,14 @@
             this.lblCant.TabIndex = 14;
             this.lblCant.Text = "Cantidad de personas";
             // 
+            // prtDialog
+            // 
+            this.prtDialog.UseEXDialog = true;
+            // 
+            // prtDocument
+            // 
+            this.prtDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.prtDocument_PrintPage);
+            // 
             // frmConsultAct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -243,5 +253,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
+        private System.Windows.Forms.PrintDialog prtDialog;
+        private System.Drawing.Printing.PrintDocument prtDocument;
     }
 }

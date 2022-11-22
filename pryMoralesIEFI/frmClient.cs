@@ -24,10 +24,11 @@ namespace pryMoralesIEFI
 
         private void frmClient_Load(object sender, EventArgs e)
         {
-            
+            //Estilos a la grilla
+            client.GridStyle(dgvClient);
+
             client.ShowClientFullInGrid(dgvClient);
             
-            //dgvClient.DataSource = client.ListarProductos();
 
             //Cargar las listas
             clsNeighbour neighbour = new clsNeighbour("Barrio");
@@ -148,7 +149,7 @@ namespace pryMoralesIEFI
 
         private void txtDNISearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-            client.IsNumber(e);
+            client.IsNatural(e);
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -158,7 +159,7 @@ namespace pryMoralesIEFI
 
         private void txtBalance_KeyPress(object sender, KeyPressEventArgs e)
         {
-            client.IsNumber(e);
+            client.IsRational(e, txtBalance);
         }
     }
 }

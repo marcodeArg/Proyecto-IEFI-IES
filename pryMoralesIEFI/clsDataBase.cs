@@ -78,14 +78,6 @@ namespace pryMoralesIEFI
             }
         }
 
-
-        //PASARLO A LA CLASE CLIENTE
-        
-
-        //Se puede hacer que lea la tabla de socios y despues mientras que no sea fin de archivo, dentro del while, lea la tabla de actividad y compare 
-        //con el id que esta en la tabla de socios con el de actividad y lo remplce. Despues con el baarrio hacer exactamente lo mismo
-
-
         public void ShowInList(ComboBox list, string column, string id)
         {
             try
@@ -163,27 +155,84 @@ namespace pryMoralesIEFI
         //Estilo de la grilla
         public void GridStyle(DataGridView grid)
         {
-            //grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            //COLUMNAS
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            grid.AllowUserToResizeRows = false;
             grid.AllowUserToResizeColumns = false;
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.RowHeadersVisible = false;
 
+            //FILAS
             Padding newPadding = new Padding(2, 5, 2, 5);
             grid.RowTemplate.DefaultCellStyle.Padding = newPadding;
-
+            grid.RowHeadersVisible = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.MultiSelect = false;
             grid.RowTemplate.Height = 30;
+            grid.AllowUserToResizeRows = false;
         }
 
 
         //Manejo de inputs
 
-        //Numeros enteros
-        public bool IsNumber(KeyPressEventArgs e)
+        //Numeros naturales
+        public bool IsNatural(KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            return e.Handled;
+        }
+
+        //Numeros Racionales
+        public bool IsRational(KeyPressEventArgs e, TextBox textbox)
+        {
+            string varNumbers = "0123456789";
+            string varInput = textbox.Text;
+            bool alreadyOne = false;
+
+
+            //solo se puede poner - en la primera posicion. Solo se puede poner . luego de un numero
+            if (varInput.Length == 0)
+            {
+                varNumbers += "-";
+            } else
+            {
+                varNumbers += ".";
+            }
+
+            //Controlar que se introduzca solamente numeros, guion o punto
+            foreach (char c in varNumbers)
+            {
+                if (e.KeyChar == c)
+                {
+                    e.Handled = false;
+                    break;
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+
+            //Validar si ya se colocó un punto
+            foreach (char c in varInput)
+            {
+
+                if (c == Convert.ToChar("."))
+                {
+                    alreadyOne = true;
+                    break;
+                }
+            }
+
+            //Permitir borrar
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+
+            //Controlar que se pueda colocar un solo punto
+            if (e.KeyChar == Convert.ToChar(".") && alreadyOne == true)
             {
                 e.Handled = true;
             }
@@ -203,10 +252,6 @@ namespace pryMoralesIEFI
 
             return e.Handled;
         }
-
-
-
-
 
 
         
