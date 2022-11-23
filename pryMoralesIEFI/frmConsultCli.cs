@@ -20,35 +20,75 @@ namespace pryMoralesIEFI
         }
 
         clsClient client = new clsClient("Socio");
+        private int varSelec;
 
         private void frmConsultCli_Load(object sender, EventArgs e)
         {
-            //Cargar en la lista todos los dni
-            client.ShowInList(lstSelec, "Dni_Socio", "Dni_Socio");
+            if (client.ExistContent() && client.ExistContent("Actividad"))
+            {
 
-            int varSelec = Convert.ToInt32(lstSelec.SelectedValue);
+                //Cargar en la lista todos los dni
+                client.ShowInList(lstSelec, "Dni_Socio", "Dni_Socio");
 
-            //Mostrar informacion del DNI
-            int codigoAct = FindClient(varSelec);
-            FindActivity(codigoAct);
+                varSelec = Convert.ToInt32(lstSelec.SelectedValue);
+
+                //Mostrar informacion del DNI
+                int codigoAct = FindClient(varSelec);
+                txtActivity.Text = client.TransformCodeToDetail(codigoAct, "Actividad");
+
+            }
+            else
+            {
+                MessageBox.Show("Primero debe cargar con datos las tablas 'Socio' y 'Actividad'");
+                btnExport.Enabled = false;
+                btnPrint.Enabled = false;
+            }
         }
 
         private void lstSelec_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
-            int varSelec = Convert.ToInt32(lstSelec.SelectedValue);
+            varSelec = Convert.ToInt32(lstSelec.SelectedValue);
 
             //Mostrar informacion del DNI
             int codigoAct = FindClient(varSelec);
-            FindActivity(codigoAct);
+
+            txtActivity.Text = client.TransformCodeToDetail(codigoAct, "Actividad");
         }
+
+        
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            prtDialog.ShowDialog();
+            prtDocument.PrinterSettings = prtDialog.PrinterSettings;
+            prtDocument.Print();
+            MessageBox.Show("Impreso correctamente");
+        }
+
+        private void prtDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            client.PrintSpecificClient(e, varSelec);
+        }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            client.GenerateSpecificReport(varSelec);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
         //Buscar la informacion del cliente y devolver el codigo de actividad
         private int FindClient(int choice)
         {
             client.DbConnection = new OleDbConnection(client.StringConnection);
             client.DbCommand = new OleDbCommand("SELECT * FROM Socio", client.DbConnection);
-            int varCodeAct;
+            int varCodeAct = -1;
 
             try
             {
@@ -67,46 +107,13 @@ namespace pryMoralesIEFI
                 client.DbReader.Close();
                 client.DbConnection.Close();
 
-                return varCodeAct;
             }
             catch (Exception err)
             {
                 MessageBox.Show("Se produjo un error al buscar el cliente solicitado: \n" + err.Message);
             }
 
-            return -1;
+            return varCodeAct;
         }
-
-        //Buscar la actividad correspondiente usando el codigo del cliente
-        private void FindActivity(int codeActivity)
-        {
-            //Aca podria crear una instancia de la clase Actividad, pero como no necesito ningun metodo de la clase
-            //uso la clase cliente y listo.
-
-            client.DbConnection = new OleDbConnection(client.StringConnection);
-            client.DbCommand = new OleDbCommand("SELECT * FROM Actividad", client.DbConnection);
-
-            try
-            {
-                client.DbConnection.Open();
-                client.DbReader = client.DbCommand.ExecuteReader();
-
-                //Encontrar el dni seleccionado usando busqueda rapida
-                while (client.DbReader.Read() && Convert.ToInt32(client.DbReader["Codigo_Actividad"]) != codeActivity)
-                {
-                }
-
-                txtActivity.Text = client.DbReader["Detalle_Actividad"].ToString();
-
-                client.DbReader.Close();
-                client.DbConnection.Close();
-
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Se produjo un error al buscar la actividad: \n" + err.Message);
-            }
-        }
-
     }
 }

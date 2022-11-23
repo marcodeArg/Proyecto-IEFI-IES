@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConsultAct));
             this.lblActivity = new System.Windows.Forms.Label();
             this.lstActivity = new System.Windows.Forms.ComboBox();
             this.dgvClient = new System.Windows.Forms.DataGridView();
@@ -46,7 +50,9 @@
             this.lblCant = new System.Windows.Forms.Label();
             this.prtDialog = new System.Windows.Forms.PrintDialog();
             this.prtDocument = new System.Drawing.Printing.PrintDocument();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblActivity
@@ -60,10 +66,11 @@
             // 
             // lstActivity
             // 
+            this.lstActivity.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lstActivity.FormattingEnabled = true;
             this.lstActivity.Location = new System.Drawing.Point(125, 21);
             this.lstActivity.Name = "lstActivity";
-            this.lstActivity.Size = new System.Drawing.Size(295, 28);
+            this.lstActivity.Size = new System.Drawing.Size(559, 28);
             this.lstActivity.TabIndex = 1;
             this.lstActivity.SelectionChangeCommitted += new System.EventHandler(this.lstActivity_SelectionChangeCommitted);
             // 
@@ -72,17 +79,39 @@
             this.dgvClient.AllowUserToAddRows = false;
             this.dgvClient.AllowUserToDeleteRows = false;
             this.dgvClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvClient.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(215)))), ((int)(((byte)(205)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(79)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(79)))), ((int)(((byte)(82)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClient.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvClient.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(79)))), ((int)(((byte)(82)))));
             this.dgvClient.Location = new System.Drawing.Point(21, 66);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
-            this.dgvClient.Size = new System.Drawing.Size(399, 204);
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(215)))), ((int)(((byte)(205)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            this.dgvClient.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvClient.Size = new System.Drawing.Size(663, 204);
             this.dgvClient.TabIndex = 2;
             // 
             // lblHigBalance
             // 
             this.lblHigBalance.AutoSize = true;
-            this.lblHigBalance.Location = new System.Drawing.Point(447, 66);
+            this.lblHigBalance.Location = new System.Drawing.Point(29, 46);
             this.lblHigBalance.Name = "lblHigBalance";
             this.lblHigBalance.Size = new System.Drawing.Size(94, 20);
             this.lblHigBalance.TabIndex = 3;
@@ -91,7 +120,7 @@
             // lblLowBalance
             // 
             this.lblLowBalance.AutoSize = true;
-            this.lblLowBalance.Location = new System.Drawing.Point(447, 112);
+            this.lblLowBalance.Location = new System.Drawing.Point(29, 89);
             this.lblLowBalance.Name = "lblLowBalance";
             this.lblLowBalance.Size = new System.Drawing.Size(96, 20);
             this.lblLowBalance.TabIndex = 4;
@@ -100,7 +129,7 @@
             // lblTotBlance
             // 
             this.lblTotBlance.AutoSize = true;
-            this.lblTotBlance.Location = new System.Drawing.Point(447, 158);
+            this.lblTotBlance.Location = new System.Drawing.Point(29, 134);
             this.lblTotBlance.Name = "lblTotBlance";
             this.lblTotBlance.Size = new System.Drawing.Size(116, 20);
             this.lblTotBlance.TabIndex = 5;
@@ -109,7 +138,7 @@
             // lblAvgBalance
             // 
             this.lblAvgBalance.AutoSize = true;
-            this.lblAvgBalance.Location = new System.Drawing.Point(447, 250);
+            this.lblAvgBalance.Location = new System.Drawing.Point(353, 89);
             this.lblAvgBalance.Name = "lblAvgBalance";
             this.lblAvgBalance.Size = new System.Drawing.Size(148, 20);
             this.lblAvgBalance.TabIndex = 6;
@@ -117,7 +146,7 @@
             // 
             // txtAvgBalance
             // 
-            this.txtAvgBalance.Location = new System.Drawing.Point(625, 247);
+            this.txtAvgBalance.Location = new System.Drawing.Point(531, 86);
             this.txtAvgBalance.Name = "txtAvgBalance";
             this.txtAvgBalance.ReadOnly = true;
             this.txtAvgBalance.Size = new System.Drawing.Size(119, 26);
@@ -125,7 +154,7 @@
             // 
             // txtTotBalance
             // 
-            this.txtTotBalance.Location = new System.Drawing.Point(625, 155);
+            this.txtTotBalance.Location = new System.Drawing.Point(207, 131);
             this.txtTotBalance.Name = "txtTotBalance";
             this.txtTotBalance.ReadOnly = true;
             this.txtTotBalance.Size = new System.Drawing.Size(119, 26);
@@ -133,7 +162,7 @@
             // 
             // txtLowBalance
             // 
-            this.txtLowBalance.Location = new System.Drawing.Point(625, 109);
+            this.txtLowBalance.Location = new System.Drawing.Point(207, 86);
             this.txtLowBalance.Name = "txtLowBalance";
             this.txtLowBalance.ReadOnly = true;
             this.txtLowBalance.Size = new System.Drawing.Size(119, 26);
@@ -141,7 +170,7 @@
             // 
             // txtHigBalance
             // 
-            this.txtHigBalance.Location = new System.Drawing.Point(625, 63);
+            this.txtHigBalance.Location = new System.Drawing.Point(207, 43);
             this.txtHigBalance.Name = "txtHigBalance";
             this.txtHigBalance.ReadOnly = true;
             this.txtHigBalance.Size = new System.Drawing.Size(119, 26);
@@ -149,37 +178,47 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(654, 293);
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPrint.Location = new System.Drawing.Point(594, 480);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(90, 33);
             this.btnPrint.TabIndex = 11;
             this.btnPrint.Text = "Imprimir";
-            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(499, 293);
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Location = new System.Drawing.Point(439, 480);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(136, 33);
             this.btnExport.TabIndex = 12;
             this.btnExport.Text = "Generar reporte";
-            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(399, 293);
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(339, 480);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(77, 33);
             this.btnClose.TabIndex = 13;
             this.btnClose.Text = "Salir";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // txtCant
             // 
-            this.txtCant.Location = new System.Drawing.Point(625, 201);
+            this.txtCant.Location = new System.Drawing.Point(531, 43);
             this.txtCant.Name = "txtCant";
             this.txtCant.ReadOnly = true;
             this.txtCant.Size = new System.Drawing.Size(119, 26);
@@ -188,7 +227,7 @@
             // lblCant
             // 
             this.lblCant.AutoSize = true;
-            this.lblCant.Location = new System.Drawing.Point(447, 204);
+            this.lblCant.Location = new System.Drawing.Point(353, 46);
             this.lblCant.Name = "lblCant";
             this.lblCant.Size = new System.Drawing.Size(165, 20);
             this.lblCant.TabIndex = 14;
@@ -202,34 +241,49 @@
             // 
             this.prtDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.prtDocument_PrintPage);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtHigBalance);
+            this.groupBox1.Controls.Add(this.txtCant);
+            this.groupBox1.Controls.Add(this.lblHigBalance);
+            this.groupBox1.Controls.Add(this.lblCant);
+            this.groupBox1.Controls.Add(this.txtLowBalance);
+            this.groupBox1.Controls.Add(this.lblLowBalance);
+            this.groupBox1.Controls.Add(this.txtTotBalance);
+            this.groupBox1.Controls.Add(this.lblTotBlance);
+            this.groupBox1.Controls.Add(this.txtAvgBalance);
+            this.groupBox1.Controls.Add(this.lblAvgBalance);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox1.Location = new System.Drawing.Point(21, 295);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(663, 170);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Información";
+            // 
             // frmConsultAct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 346);
-            this.Controls.Add(this.txtCant);
-            this.Controls.Add(this.lblCant);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(215)))), ((int)(((byte)(205)))));
+            this.ClientSize = new System.Drawing.Size(709, 540);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.txtHigBalance);
-            this.Controls.Add(this.txtLowBalance);
-            this.Controls.Add(this.txtTotBalance);
-            this.Controls.Add(this.txtAvgBalance);
-            this.Controls.Add(this.lblAvgBalance);
-            this.Controls.Add(this.lblTotBlance);
-            this.Controls.Add(this.lblLowBalance);
-            this.Controls.Add(this.lblHigBalance);
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.lstActivity);
             this.Controls.Add(this.lblActivity);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmConsultAct";
             this.Text = "Consulta - Actividad";
             this.Load += new System.EventHandler(this.frmConsultAct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,5 +309,6 @@
         private System.Windows.Forms.Label lblCant;
         private System.Windows.Forms.PrintDialog prtDialog;
         private System.Drawing.Printing.PrintDocument prtDocument;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

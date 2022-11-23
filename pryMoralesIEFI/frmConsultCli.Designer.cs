@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConsultCli));
             this.lblSelec = new System.Windows.Forms.Label();
             this.lstSelec = new System.Windows.Forms.ComboBox();
             this.cbInfo = new System.Windows.Forms.GroupBox();
@@ -37,13 +38,18 @@
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblActivity = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.prtDialog = new System.Windows.Forms.PrintDialog();
+            this.prtDocument = new System.Drawing.Printing.PrintDocument();
             this.cbInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblSelec
             // 
             this.lblSelec.AutoSize = true;
-            this.lblSelec.Location = new System.Drawing.Point(36, 46);
+            this.lblSelec.Location = new System.Drawing.Point(25, 29);
             this.lblSelec.Name = "lblSelec";
             this.lblSelec.Size = new System.Drawing.Size(112, 20);
             this.lblSelec.TabIndex = 0;
@@ -51,8 +57,9 @@
             // 
             // lstSelec
             // 
+            this.lstSelec.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lstSelec.FormattingEnabled = true;
-            this.lstSelec.Location = new System.Drawing.Point(176, 43);
+            this.lstSelec.Location = new System.Drawing.Point(165, 26);
             this.lstSelec.Name = "lstSelec";
             this.lstSelec.Size = new System.Drawing.Size(245, 28);
             this.lstSelec.TabIndex = 1;
@@ -66,7 +73,7 @@
             this.cbInfo.Controls.Add(this.lblBalance);
             this.cbInfo.Controls.Add(this.lblActivity);
             this.cbInfo.Controls.Add(this.lblName);
-            this.cbInfo.Location = new System.Drawing.Point(40, 96);
+            this.cbInfo.Location = new System.Drawing.Point(29, 79);
             this.cbInfo.Name = "cbInfo";
             this.cbInfo.Size = new System.Drawing.Size(381, 210);
             this.cbInfo.TabIndex = 2;
@@ -124,15 +131,68 @@
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Nombre";
             // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Location = new System.Drawing.Point(65, 310);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(77, 33);
+            this.btnExit.TabIndex = 42;
+            this.btnExit.Text = "Salir";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Location = new System.Drawing.Point(165, 310);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(136, 33);
+            this.btnExport.TabIndex = 41;
+            this.btnExport.Text = "Generar reporte";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Location = new System.Drawing.Point(320, 310);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(90, 33);
+            this.btnPrint.TabIndex = 40;
+            this.btnPrint.Text = "Imprimir";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // prtDialog
+            // 
+            this.prtDialog.UseEXDialog = true;
+            // 
+            // prtDocument
+            // 
+            this.prtDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.prtDocument_PrintPage);
+            // 
             // frmConsultCli
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 378);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(215)))), ((int)(((byte)(205)))));
+            this.ClientSize = new System.Drawing.Size(431, 363);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.cbInfo);
             this.Controls.Add(this.lstSelec);
             this.Controls.Add(this.lblSelec);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmConsultCli";
             this.Text = "Consulta - Cliente";
@@ -155,5 +215,10 @@
         private System.Windows.Forms.Label lblBalance;
         private System.Windows.Forms.Label lblActivity;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.PrintDialog prtDialog;
+        private System.Drawing.Printing.PrintDocument prtDocument;
     }
 }

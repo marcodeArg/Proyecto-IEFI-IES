@@ -22,6 +22,10 @@ namespace pryMoralesIEFI
 
         private void frmNeighbour_Load(object sender, EventArgs e)
         {
+            //Estilo a la grilla
+            neighbour.GridStyle(dgvNeighbour);
+
+            //Cargar en la grilla la información
             neighbour.ShowInGrid(dgvNeighbour, sql);
         }
 
@@ -78,8 +82,18 @@ namespace pryMoralesIEFI
         private void txtCodeSearch_TextChanged(object sender, EventArgs e)
         {
             DataView dv = neighbour.DataBase.Tables["Barrio"].DefaultView;
-            dv.RowFilter = String.Format("convert(Codigo_Barrio, 'System.String') LIKE '*{0}*'", txtCodeSearch.Text);
+            dv.RowFilter = String.Format("convert(Codigo, 'System.String') LIKE '*{0}*'", txtCodeSearch.Text);
             dgvNeighbour.DataSource = dv;
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            neighbour.IsText(e);
+        }
+
+        private void txtCodeSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            neighbour.IsNatural(e);
         }
     }
 }

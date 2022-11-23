@@ -20,9 +20,10 @@ namespace pryMoralesIEFI
         clsActivity activity = new clsActivity("Actividad");
         private string sql = "SELECT Codigo_Actividad AS Codigo, Detalle_Actividad AS Nombre FROM Actividad";
 
-
         private void frmActivity_Load(object sender, EventArgs e)
         {
+            activity.GridStyle(dgvActivities);
+
             activity.ShowInGrid(dgvActivities, sql);
         }
 
@@ -80,10 +81,19 @@ namespace pryMoralesIEFI
 
         private void txtCodeSearch_TextChanged(object sender, EventArgs e)
         {
-
             DataView dv = activity.DataBase.Tables["Actividad"].DefaultView;
-            dv.RowFilter = String.Format("convert(Codigo_Actividad, 'System.String') LIKE '*{0}*'", txtCodeSearch.Text);
+            dv.RowFilter = String.Format("convert(Codigo, 'System.String') LIKE '*{0}*'", txtCodeSearch.Text);
             dgvActivities.DataSource = dv;
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            activity.IsText(e);
+        }
+
+        private void txtCodeSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            activity.IsNatural(e);
         }
     }
 }

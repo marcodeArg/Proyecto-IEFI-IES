@@ -9,6 +9,10 @@ using System.Data.OleDb;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
+using System.Data.Common;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace pryMoralesIEFI
 {
@@ -37,9 +41,9 @@ namespace pryMoralesIEFI
         public int Cod_activity { get { return cod_activity; } set { cod_activity = value; } }
         public int Balance { get { return balance; } set { balance = value; } }
 
-        public DataTable Dt { get { return dt; } set { dt = value; } } 
+        public DataTable Dt { get { return dt; } set { dt = value; } }
 
-
+        //Mostrar toda la informacion de los clientes en una grilla, variante 1
         public void ShowClientFullInGrid(DataGridView grid)
         {
             DbConnection = new OleDbConnection(StringConnection);
@@ -72,7 +76,7 @@ namespace pryMoralesIEFI
             }
         }
 
-
+        //Mostrar toda la informacion de los clientes en una grilla, variante 2
         public void ShowAllClients(DataGridView grid)
         {
 
@@ -97,8 +101,8 @@ namespace pryMoralesIEFI
                     grid.Rows[fg].Cells["DNI"].Value = Convert.ToInt32(DbReader["DNI"]);
                     grid.Rows[fg].Cells["Nombre"].Value = DbReader["Nombre"].ToString();
                     grid.Rows[fg].Cells["Direccion"].Value = DbReader["Direccion"].ToString();
-                    grid.Rows[fg].Cells["Barrio"].Value = GetDetail(Convert.ToInt32(DbReader["Barrio"]), "Barrio");
-                    grid.Rows[fg].Cells["Actividad"].Value = GetDetail(Convert.ToInt32(DbReader["Actividad"]), "Actividad");
+                    grid.Rows[fg].Cells["Barrio"].Value = TransformCodeToDetail(Convert.ToInt32(DbReader["Barrio"]), "Barrio");
+                    grid.Rows[fg].Cells["Actividad"].Value = TransformCodeToDetail(Convert.ToInt32(DbReader["Actividad"]), "Actividad");
                     grid.Rows[fg].Cells["Saldo"].Value = Convert.ToInt32(DbReader["Saldo"]);
 
                     fg++;
@@ -110,6 +114,52 @@ namespace pryMoralesIEFI
                 MessageBox.Show("Se produjo al cargar la información en la grilla:\n" + err.Message);
             }
         }
+
+        //Obtener informacion sobre los saldos de los clientes (mayor, menor, cantidad, total)
+        public void GetInfoClient()
+        {
+
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand(Sql, DbConnection);
+
+            DbConnection.Open();
+            DbReader = DbCommand.ExecuteReader();
+
+
+            //Para que agarre el primer registro
+            if (DbReader.Read())
+            {
+                Higher = Convert.ToInt32(DbReader["Saldo"]);
+                Lower = Convert.ToInt32(DbReader["Saldo"]);
+            }
+
+            DbReader.Close();
+            DbReader = DbCommand.ExecuteReader();
+
+
+            while (DbReader.Read())
+            {
+                int saldo = Convert.ToInt32(DbReader["Saldo"]);
+
+                if (saldo > Higher)
+                {
+                    Higher = saldo;
+                }
+
+                if (saldo < Lower)
+                {
+                    Lower = saldo;
+                }
+
+                Total += saldo;
+                Counter++;
+            }
+
+            DbReader.Close();
+            DbConnection.Close();
+        }
+
+
 
         public void InsertClient()
         {
@@ -197,13 +247,165 @@ namespace pryMoralesIEFI
                 MessageBox.Show("Error:" + err.Message);
 
             }
-        }   
+        }
 
-        //Terminar imprimir
-        public void PringClient(PrintPageEventArgs e)
+
+       
+
+        //Imprimir
+        public void PrintGenericClient(PrintPageEventArgs e)
         {
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand(Sql, DbConnection);
+            
+            Font titleFont = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold);
+            Font headerFont = new Font(FontFamily.GenericSansSerif, 16);
+            Font textFont = new Font(FontFamily.GenericSansSerif, 12);
+
             try
             {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                //Titulo
+                e.Graphics.DrawString("Clientes", titleFont, Brushes.Black, 100, 100);
+
+                //Cabeceras
+                e.Graphics.DrawString("DNI", headerFont, Brushes.Black, 100, 180);
+                e.Graphics.DrawString("Nombre", headerFont, Brushes.Black, 210, 180);
+                e.Graphics.DrawString("Saldo", headerFont, Brushes.Black, 400, 180);
+
+                int f = 260;
+
+                while (DbReader.Read())
+                {
+                    //Información
+                    e.Graphics.DrawString(DbReader["DNI"].ToString(), textFont, Brushes.Black, 100, f);
+                    e.Graphics.DrawString(DbReader["Nombre"].ToString(), textFont, Brushes.Black, 210, f);
+                    e.Graphics.DrawString(DbReader["Saldo"].ToString(), textFont, Brushes.Black, 400, f);
+
+                    f = f + 22;
+                }
+
+                DbReader.Close();
+                DbConnection.Close();
+
+                GetInfoClient();
+
+                f += 35; 
+                e.Graphics.DrawString("Total de saldos:", textFont, Brushes.Black, 100, f);
+                e.Graphics.DrawString(Total.ToString("0.00"), textFont, Brushes.Black, 300, f);
+                f += 22;
+                e.Graphics.DrawString("Cantidad de clientes:", textFont, Brushes.Black, 100, f);
+                e.Graphics.DrawString(Counter.ToString(), textFont, Brushes.Black, 300, f);
+                f += 22;
+                e.Graphics.DrawString("Promedio de saldos:", textFont, Brushes.Black, 100, f);
+                e.Graphics.DrawString((Total / Counter).ToString("0.00"), textFont, Brushes.Black, 300, f);
+
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error al imprimir:" + err.Message);
+            }
+        }
+
+        public void PrintSpecificClient(PrintPageEventArgs e, int dni)
+        {
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand("SELECT * FROM Socio", DbConnection);
+
+            Font titleFont = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold);
+            Font headerFont = new Font(FontFamily.GenericSansSerif, 16);
+            Font textFont = new Font(FontFamily.GenericSansSerif, 12);
+
+            try
+            {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                //Titulo
+                e.Graphics.DrawString("Cliente solicitado", titleFont, Brushes.Black, 100, 100);
+
+                //Cabeceras
+                e.Graphics.DrawString("DNI", headerFont, Brushes.Black, 100, 180);
+                e.Graphics.DrawString("Nombre", headerFont, Brushes.Black, 300, 180);
+                e.Graphics.DrawString("Actividad", headerFont, Brushes.Black, 500, 180);
+                e.Graphics.DrawString("Saldo", headerFont, Brushes.Black, 700, 180);
+
+                while (DbReader.Read() && Convert.ToInt32(DbReader["Dni_Socio"]) != dni)
+                {
+                    //Leer
+                }
+
+                //Información
+                e.Graphics.DrawString(DbReader["Dni_Socio"].ToString(), textFont, Brushes.Black, 100, 260);
+                e.Graphics.DrawString(DbReader["Nombre_Apellido"].ToString(), textFont, Brushes.Black, 300, 260);
+                e.Graphics.DrawString(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Actividad"]), "Actividad"), textFont, Brushes.Black, 500, 260);
+                e.Graphics.DrawString(DbReader["Saldo"].ToString(), textFont, Brushes.Black, 700, 260);
+
+                DbReader.Close();
+                DbConnection.Close();
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error al imprimir:" + err.Message);
+            }
+        }
+
+        public void PrintAllClients(PrintPageEventArgs e)
+        {
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand("SELECT * FROM Socio", DbConnection);
+
+            Font titleFont = new Font(FontFamily.GenericMonospace, 20, FontStyle.Bold);
+            Font headerFont = new Font(FontFamily.GenericSansSerif, 14);
+            Font textFont = new Font(FontFamily.GenericSansSerif, 10);
+
+            try
+            {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                //Titulo
+                e.Graphics.DrawString("Clientes", titleFont, Brushes.Black, 100, 100);
+
+                //Cabeceras
+                e.Graphics.DrawString("DNI", headerFont, Brushes.Black, 100, 180);
+                e.Graphics.DrawString("Nombre", headerFont, Brushes.Black, 180, 180);
+                e.Graphics.DrawString("Direccion", headerFont, Brushes.Black, 320, 180);
+                e.Graphics.DrawString("Barrio", headerFont, Brushes.Black, 490, 180);
+                e.Graphics.DrawString("Actividad", headerFont, Brushes.Black, 600, 180);
+                e.Graphics.DrawString("Saldo", headerFont, Brushes.Black, 700, 180);
+
+                int f = 260;
+
+                while (DbReader.Read())
+                {
+                    //Información
+                    e.Graphics.DrawString(DbReader["Dni_Socio"].ToString(), textFont, Brushes.Black, 100, f);
+                    e.Graphics.DrawString(DbReader["Nombre_Apellido"].ToString(), textFont, Brushes.Black, 180, f);
+                    e.Graphics.DrawString(DbReader["Direccion"].ToString(), textFont, Brushes.Black, 320, f);
+                    e.Graphics.DrawString(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Barrio"]), "Barrio"), textFont, Brushes.Black, 490, f);
+                    e.Graphics.DrawString(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Actividad"]), "Actividad"), textFont, Brushes.Black, 600, f);
+                    e.Graphics.DrawString(DbReader["Saldo"].ToString(), textFont, Brushes.Black, 700, f);
+
+                    f = f + 22;
+                }
+
+                DbReader.Close();
+                DbConnection.Close();
+
+                //GetInfoClient();
+
+                f += 35;
+                e.Graphics.DrawString("Cantidad de clientes:", textFont, Brushes.Black, 100, f);
+                e.Graphics.DrawString(Counter.ToString(), textFont, Brushes.Black, 320, f);
+                f += 22;
+                e.Graphics.DrawString("Total de saldos:", textFont, Brushes.Black, 100, f);
+                e.Graphics.DrawString(Total.ToString("0.00"), textFont, Brushes.Black, 320, f);
+
 
             }
             catch (Exception err)
@@ -213,39 +415,142 @@ namespace pryMoralesIEFI
         }
 
         //Generar reporte
-
-
-        //PROCEDIMIENTOS USADOS EN PROCEDIMIENTOS PUBLICOS
-        private string GetDetail(int code, string tn)
+        public void GenerateGenericReport(string name)
         {
-            OleDbConnection connection = new OleDbConnection(StringConnection);
-            OleDbCommand command = new OleDbCommand("SELECT * FROM " + tn, connection);
-            OleDbDataReader reader;
-            string varDetail = "";
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand(Sql, DbConnection);
 
             try
             {
-                connection.Open();
-                reader = command.ExecuteReader();
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
 
-                while (reader.Read() && Convert.ToInt32(reader["Codigo_" + tn]) != code)
+                StreamWriter sw = new StreamWriter("ReportePor" + name + ".csv", false, Encoding.UTF8);
+                sw.WriteLine("Reporte por " + name + "!");
+                sw.WriteLine("");
+                sw.WriteLine("DNI;Nombre;Saldo");
+
+                while (DbReader.Read())
+                {
+                    sw.WriteLine(DbReader["DNI"].ToString() + ";" + DbReader["Nombre"] + ";" + DbReader["Saldo"].ToString());
+                }
+                
+                DbReader.Close();
+                DbConnection.Close();
+
+                //Obtener mayor, menor, total y cantidad de saldos
+                GetInfoClient();
+
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("Total de saldos:;;" + Total);
+                sw.WriteLine("Cantidad de clientes:;;" + Counter);
+                sw.WriteLine("Promedio de saldos:;;" + (Total / Counter).ToString("0.00"));
+
+                sw.Close();
+
+
+                MessageBox.Show("Reporte generado correctamente");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Se produjo un error:" + err.Message);
+            }
+        }
+
+        public void GenerateSpecificReport(int dni)
+        {
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand("SELECT * FROM Socio", DbConnection);
+
+            try
+            {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                StreamWriter sw = new StreamWriter("ReporteClienteEspecifico.csv", false, Encoding.UTF8);
+                
+
+                while (DbReader.Read() && Convert.ToInt32(DbReader["Dni_Socio"]) != dni)
                 {
                     //Leer
                 }
 
-                varDetail = reader["Detalle_" + tn].ToString();
+                sw.WriteLine("Reporte de " + DbReader["Nombre_Apellido"].ToString());
+                sw.WriteLine("");
+                sw.WriteLine("DNI;Nombre;Actividad;Saldo");
 
-                reader.Close();
-                connection.Close();
+                sw.Write(DbReader["Dni_Socio"].ToString());
+                sw.Write(";");
+                sw.Write(DbReader["Nombre_Apellido"].ToString());
+                sw.Write(";");
+                sw.Write(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Actividad"].ToString()), "Actividad"));
+                sw.Write(";");
+                sw.Write(DbReader["Saldo"].ToString());
 
+                sw.Close();
+                DbReader.Close();
+                DbConnection.Close();
 
+                MessageBox.Show("Reporte generado correctamente");
             }
             catch (Exception err)
             {
-                MessageBox.Show("Se produjo un error(" + tn +"):\n" + err.Message);
+                MessageBox.Show("Se produjo un error:" + err.Message);
             }
-
-            return varDetail;
         }
+        
+        public void GenerateAllReport()
+        {
+            DbConnection = new OleDbConnection(StringConnection);
+            DbCommand = new OleDbCommand("SELECT * FROM Socio", DbConnection);
+
+            try
+            {
+                DbConnection.Open();
+                DbReader = DbCommand.ExecuteReader();
+
+                StreamWriter sw = new StreamWriter("ReporteGeneral.csv", false, Encoding.UTF8);
+                sw.WriteLine("Reporte de todos los clientes!");
+                sw.WriteLine("");
+                sw.WriteLine("DNI;Nombre;Direccion;Barrio;Actividad;Saldo");
+
+                while (DbReader.Read())
+                {
+                    sw.Write(DbReader["Dni_Socio"].ToString());
+                    sw.Write(";");
+                    sw.Write(DbReader["Nombre_Apellido"].ToString());
+                    sw.Write(";");
+                    sw.Write(DbReader["Direccion"].ToString());
+                    sw.Write(";");
+                    sw.Write(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Barrio"].ToString()), "Barrio"));
+                    sw.Write(";");
+                    sw.Write(TransformCodeToDetail(Convert.ToInt32(DbReader["Codigo_Actividad"].ToString()), "Actividad"));
+                    sw.Write(";");
+                    sw.WriteLine(DbReader["Saldo"].ToString());
+                }
+
+                DbReader.Close();
+                DbConnection.Close();
+
+                //Obtener mayor, menor, total y cantidad de saldos
+                //GetInfoClient();
+
+                sw.WriteLine("");
+                sw.WriteLine("");
+                sw.WriteLine("Cantidad de clientes:;;" + Counter);
+                sw.WriteLine("Total de saldos:;;" + Total.ToString("0.00"));
+                sw.Close();
+
+
+                MessageBox.Show("Reporte generado correctamente");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Se produjo un error:" + err.Message);
+            }
+        }
+
+        
     }
 }

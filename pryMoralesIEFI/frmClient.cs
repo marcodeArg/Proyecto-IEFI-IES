@@ -61,7 +61,6 @@ namespace pryMoralesIEFI
             {
                 MessageBox.Show("Ya existe un cliente con el mismo DNI");
                 txtDNI.Focus();
-
             }
         }
 
@@ -147,6 +146,7 @@ namespace pryMoralesIEFI
 
         }
 
+        //Manejo de inputs
         private void txtDNISearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             client.IsNatural(e);
@@ -160,6 +160,11 @@ namespace pryMoralesIEFI
         private void txtBalance_KeyPress(object sender, KeyPressEventArgs e)
         {
             client.IsRational(e, txtBalance);
+        }
+
+        private void txtAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            client.IsText(e);
         }
     }
 }

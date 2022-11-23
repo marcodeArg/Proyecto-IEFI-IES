@@ -24,6 +24,8 @@ namespace pryMoralesIEFI
         public int Cod_neighbour { get { return cod_neighbour; } set { cod_neighbour = value; } }
         public string Description { get { return description; } set { description = value; } }
 
+        //Metodos
+
         public void InsertNeighbour()
         {
             Sql = "INSERT INTO Barrio (Detalle_Barrio) VALUES (@name)";
